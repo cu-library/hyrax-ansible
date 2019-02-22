@@ -17,7 +17,7 @@ WorkingDirectory=/var/www/hyrax/hyrax-root
 # If you use rbenv:
 # ExecStart=/bin/bash -lc 'bundle exec sidekiq -e production'
 # If you use the system's ruby:
-ExecStart=/usr/local/bin/bundle exec sidekiq -e production
+ExecStart=/usr/local/bin/bundle exec sidekiq -e production -c {{ sidekiq_threads }}
 User=puma
 Group=puma
 

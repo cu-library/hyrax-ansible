@@ -36,9 +36,11 @@ nasm_checksum: sha1:fe098ee4dc9c4c983696c4948e64b23e4098b92b
 nasm_version: "2.14.02"
 opus_checksum: sha1:63088df89c6d868bfb160a1eff1797cb5fe42fee
 opus_version: "1.3"
+puma_web_concurency: 4
 rails_version: "5.1.6"
 ruby_tarbz2_sha1_checksum: d47ede7dab79de25fcc274dfcad0f92f389a4313 
 ruby_version: "2.5.3"
+sidekiq_threads: 10
 solr_checksum: sha512:d11545c5ac782116b53622130634adfca2d9f85271a6d99c6ae34b1d41e9625fbf8134572ce3f2b7d55b749b34adc05b303cb2d4bb6e3dca73296726dbb21b02
 solr_mirror: https://mirror.csclub.uwaterloo.ca/apache # No trailing slash!
 solr_version: "7.6.0"
