@@ -49,6 +49,8 @@ end
 #
 on_worker_boot do
   ActiveRecord::Base.establish_connection if defined?(ActiveRecord)
+  ActiveFedora::Fedora.reset! if defined?(ActiveFedora)
+  ActiveFedora::SolrService.reset! if defined?(ActiveFedora)
 end
 
 # Allow puma to be restarted by `rails restart` command.
