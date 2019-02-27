@@ -143,10 +143,12 @@ FFmpeg is built with:
 |`postgresql_contrib_package` | The name used by the `package` module when installing Postgresql's additional features. Per-Distro |
 |`postgresql_devel_package` | The name used by the `package` module when installing the Postgresql C headers and other development libraries. Per-Distro |
 |`postgresql_server_package` | The name used by the `package` module when installing the Postgresql server. Per-Distro |
+|`puma_web_concurency` | Number of Puma processes to start. Defaults to 4 |
 |`python_psycopg2_package` | The name used by the `package` module when installing the Python Postgresql library (used by Ansible). Per-Distro |
 |`redis_package` | The name used by the `package` module when installing Redis. Per-Distro |
 |`ruby_tarbz2_sha1_checksum` | Verify the ruby-`{{ ruby_version }`.tar.bz2 file, used by `ruby-install`. Format: `<checksum>` |
 |`ruby_version` | The version of Ruby to download and install. |
+|`sidekiq_threads` | Tune the number of sidekiq threads that will be started. Defaults to 10. |
 |`solr_checksum` | Verify the solr-`{{ solr_version }}`.tgz file, used by `get_url` module. Format: `<algorithm>:<checksum>`
 |`solr_mirror` | The mirror to use when downloading Solr. |
 |`solr_version` | The version of Solr to download. |
