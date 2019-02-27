@@ -16,7 +16,7 @@
 (echo -n " size: " &&  du -hs "{{ hyrax_backups_directory }}/current/redis" | cut -f 1) >> /var/log/hyrax/backup.log 2>&1
 
 # Hyrax
-(echo -n "$(date --rfc-3339=seconds) - creating hyrax backup - " && tar -cf "{{ hyrax_backups_directory }}/current/hyrax/hyrax-root.tar" -C /var/www/hyrax/ hyrax-root) >> /var/log/hyrax/backup.log 2>&1
+(echo -n "$(date --rfc-3339=seconds) - creating hyrax backup - " && tar --exclude=log --exclude=tmp/cache --exclude=tmp/pids --exclude=tmp/sessions --exclude=tmp/sockets -cf "{{ hyrax_backups_directory }}/current/hyrax/hyrax-root.tar" -C /var/www/hyrax/ hyrax-root) >> /var/log/hyrax/backup.log 2>&1
 (echo -n " size: " &&  du -hs "{{ hyrax_backups_directory }}/current/hyrax" | cut -f 1) >> /var/log/hyrax/backup.log 2>&1
 
 # All together, now!

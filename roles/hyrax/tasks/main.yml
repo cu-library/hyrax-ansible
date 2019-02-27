@@ -84,6 +84,14 @@
   become: yes
   become_user: hyrax
   changed_when: False
+  
+- name: Add sqlite3 to Gemfile
+  command: /usr/local/bin/bundle add sqlite3 --version="~> 1.3.0"
+  args:
+    chdir: /var/www/hyrax/hyrax-root
+  become: yes
+  become_user: hyrax
+  changed_when: False
 
 - name: Add sidekiq to Gemfile
   command: /usr/local/bin/bundle add sidekiq --version="~> 5.1"
