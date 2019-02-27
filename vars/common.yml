@@ -41,9 +41,9 @@ rails_version: "5.1.6"
 ruby_tarbz2_sha1_checksum: d47ede7dab79de25fcc274dfcad0f92f389a4313 
 ruby_version: "2.5.3"
 sidekiq_threads: 10
-solr_checksum: sha512:d11545c5ac782116b53622130634adfca2d9f85271a6d99c6ae34b1d41e9625fbf8134572ce3f2b7d55b749b34adc05b303cb2d4bb6e3dca73296726dbb21b02
+solr_checksum: sha512:7c4cafaf6911b33f460f81a9c9eb06b6ceb1ee7d4921fb441f5a408556a427efd269ea3a2d5215f56fb8679f4593307d04b71ee2a3fa601d53169ab216660f92
 solr_mirror: https://mirror.csclub.uwaterloo.ca/apache # No trailing slash!
-solr_version: "7.6.0"
+solr_version: "7.7.0"
 tomcat_user_password: insecure_password
 x264_checksum: sha1:66a274f39fdb08c4c09a9fc80b424bdb92821c0d
 x264_version: 20190109-2245-stable
