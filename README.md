@@ -76,7 +76,7 @@ Node.js latest version 10.x is installed using the NodeSource repositories.
 Some software is installed at a specific version:
 
 * Fedora Repository v4.7.5 (Set using `fedora4_version` variable.)
-* Solr v7.6.0 (Set using `solr_version` variable.)
+* Solr v7.7.0 (Set using `solr_version` variable.)
 * Ruby 2.5.3 (Set using `ruby_version` variable.)
 * FFmpeg 4.1 (Set using `ffmpeg_version` variable.)
 * Rails 5.1.6 (Set using `rails_version` variable.)
