@@ -75,32 +75,32 @@ Node.js latest version 10.x is installed using the NodeSource repositories.
 
 Some software is installed at a specific version:
 
-* Fedora Repository 4.7.5 (Set using `fedora4_version` variable.)
-* Solr 7.7.0 (Set using `solr_version` variable.)
-* Ruby 2.5.3 (Set using `ruby_version` variable.)
-* FFmpeg 4.1.1 (Set using `ffmpeg_version` variable.)
-* Rails 5.1.6 (Set using `rails_version` variable.)
-* Hyrax 2.4.1 (Set using `hyrax_version` variable.)
-* FITS 1.4.0 (Set using `fits_version` variable.)
+* Fedora Repository {{ fedora4_version }} (Set using `fedora4_version` variable.)
+* Solr {{ solr_version }} (Set using `solr_version` variable.)
+* Ruby {{ ruby_version }} (Set using `ruby_version` variable.)
+* FFmpeg {{ ffmpeg_version }} (Set using `ffmpeg_version` variable.)
+* Rails {{ rails_version }} (Set using `rails_version` variable.)
+* Hyrax {{ hyrax_version }} (Set using `hyrax_version` variable.)
+* FITS {{ fits_version }} (Set using `fits_version` variable.)
 
 FFmpeg is built with:
 
-* cmake: 3.13.4 (Set using `cmake_version` variable.)
-* NASM 2.14.02 (Set using `nasm_version` variable.)
-* Yasm 1.3.0 (Set using `yasm_version` variable.)
-* x264: 20190227-2245-stable (Set using `x264_version` variable.)
-* x265: 3.0 (Set using `x265_version` variable.)
-* fdk-aac: 2.0.0 (Set using `fdk_aac_version` variable.)
-* lame: 3.100 (Set using `lame_version` variable.)
-* opus: 1.3 (Set using `opus_version` variable.)
-* libogg: 1.3.3 (Set using `libogg_version` variable.)
-* libvorbis: 1.3.6 (Set using `libvorbis_version` variable.)
-* aom: a1615ed01a112432825f231a1fa47295cff127b4 (Set using `aom_version` variable.) Falling back to using a commit instead of a tagged release. The tarballs from https://aomedia.googlesource.com/aom/ are generated when requested for a particular tag. They are not stable releases, and as such do not have stable checksums. A checksum is not provided.
-* libvpx: 1.8.0 (Set using `libvpx_version` variable.)
-* libass: 0.14.0 (Set using `libass_version` variable.)
+* cmake: {{ cmake_version }} (Set using `cmake_version` variable.)
+* NASM {{ nasm_version }} (Set using `nasm_version` variable.)
+* Yasm {{ yasm_version }} (Set using `yasm_version` variable.)
+* x264: {{ x264_version }} (Set using `x264_version` variable.)
+* x265: {{ x265_version }} (Set using `x265_version` variable.)
+* fdk-aac: {{ fdk_aac_version }} (Set using `fdk_aac_version` variable.)
+* lame: {{ lame_version }} (Set using `lame_version` variable.)
+* opus: {{ opus_version }} (Set using `opus_version` variable.)
+* libogg: {{ libogg_version }} (Set using `libogg_version` variable.)
+* libvorbis: {{ libvorbis_version }} (Set using `libvorbis_version` variable.)
+* aom: {{ aom_version }} (Set using `aom_version` variable.) Falling back to using a commit instead of a tagged release. The tarballs from https://aomedia.googlesource.com/aom/ are generated when requested for a particular tag. They are not stable releases, and as such do not have stable checksums. A checksum is not provided.
+* libvpx: {{ libvpx_version }} (Set using `libvpx_version` variable.)
+* libass: {{ libass_version }} (Set using `libass_version` variable.)
 
 ## Variables
-
+{% raw %}
 |Variable|Notes|
 |---|---|
 |`aom_version` | The version of aom to download. Used to build FFmpeg. |
@@ -180,3 +180,4 @@ and per-distribution variable files to provide different variables for different
 
 **Secure**: Variables which should be different per-host and stored securely using Ansible Vaults or a tool like Hashicorp Vault. The test playbook insecurely puts these variables in `vars/common.yml`.
 
+{% endraw %}
