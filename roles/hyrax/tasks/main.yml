@@ -91,7 +91,7 @@
     regexp: "^gem 'sqlite3'"
     line: "gem 'sqlite3', '~> 1.3.0'"
 
-- name: Add sqlite3 to Gemfile
+- name: Bundle update sqlite3 to finalize sqlite3 downgrade
   command: /usr/local/bin/bundle update sqlite3
   args:
     chdir: /var/www/hyrax/hyrax-root
