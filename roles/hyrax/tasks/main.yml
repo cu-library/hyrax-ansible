@@ -84,9 +84,15 @@
   become: yes
   become_user: hyrax
   changed_when: False
-  
+
+- name: Downgrade sqlite3 gem in Gemfile
+  lineinfile:
+    path: /var/www/hyrax/hyrax-root/Gemfile
+    regexp: "^gem 'sqlite3'"
+    line: "gem 'sqlite3', '~> 1.3.0'"
+
 - name: Add sqlite3 to Gemfile
-  command: /usr/local/bin/bundle add sqlite3 --version="~> 1.3.0"
+  command: /usr/local/bin/bundle update sqlite3
   args:
     chdir: /var/www/hyrax/hyrax-root
   become: yes
