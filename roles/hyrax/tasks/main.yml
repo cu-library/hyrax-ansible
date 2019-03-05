@@ -31,6 +31,7 @@
     system: yes
     home: /var/www/hyrax
     createhome: no
+    shell: /bin/bash
 
 - name: Create the puma user
   user:
@@ -40,6 +41,11 @@
     createhome: no
     shell: /sbin/nologin
 
+- name: Gem install bundler
+  command: "/usr/local/bin/gem install bundler -v {{ bundler_version }}"
+  args:
+    creates: "/usr/local/bin/bundle"
+
 - name: Create the Hyrax parent directory
   file:
     path: /var/www/hyrax
@@ -48,80 +54,35 @@
     group: puma
     mode: u=rwX,g=rwX,o=rX
 
-- name: Gem install rails
-  command: "/usr/local/bin/gem install rails --version={{ rails_version }}"
-  args:
-    creates: "/usr/local/bin/rails"
+ - name: Create the shared directories
+   file:
+     path: "{{item}}" 
+     state: directory
+     owner: hyrax
+     group: puma
+     mode: u=rwX,g=rwX,o=rX
+   with_items:
+     - /var/www/hyrax/shared/config/initializers
+     - /var/www/hyrax/shared/log
+     - /var/www/hyrax/shared/tmp
+     - /var/www/hyrax/shared/public/system
+     - /var/www/hyrax/shared/vendor/bundle
 
-- name: Create the Hyrax project
-  command: /usr/local/bin/rails new hyrax-root --skip-bundle
-  args:
-    chdir: /var/www/hyrax
-    creates: /var/www/hyrax/hyrax-root/Gemfile
-  become: yes
-  become_user: hyrax
+- name: Upload the env file
+  template:
+    src: dotenv 
+    dest: /var/www/hyrax/.env
+    owner: hyrax
+    group: puma
+    mode: u=rx,g=rx
 
-- name: Use local path for bundle
-  command: /usr/local/bin/bundle config --local path vendor/bundle
-  args:
-   chdir: /var/www/hyrax/hyrax-root
-   creates: /var/www/hyrax/hyrax-root/.bundle/config
-  become: yes
-  become_user: hyrax
-
-- name: Add Hyrax to Gemfile
-  command: "/usr/local/bin/bundle add hyrax --version={{ hyrax_version }}"
-  args:
-    chdir: /var/www/hyrax/hyrax-root
-  become: yes
-  become_user: hyrax
-  changed_when: False
-
-- name: Add pg to Gemfile
-  command: /usr/local/bin/bundle add pg --version="~> 1.0"
-  args:
-    chdir: /var/www/hyrax/hyrax-root
-  become: yes
-  become_user: hyrax
-  changed_when: False
-
-- name: Downgrade sqlite3 gem in Gemfile
-  lineinfile:
-    path: /var/www/hyrax/hyrax-root/Gemfile
-    regexp: "^gem 'sqlite3'"
-    line: "gem 'sqlite3', '~> 1.3.0'"
-
-- name: Bundle update sqlite3 to finalize downgrade
-  command: /usr/local/bin/bundle update sqlite3
-  args:
-    chdir: /var/www/hyrax/hyrax-root
-  become: yes
-  become_user: hyrax
-  changed_when: False
-
-- name: Add sidekiq to Gemfile
-  command: /usr/local/bin/bundle add sidekiq --version="~> 5.1"
-  args:
-    chdir: /var/www/hyrax/hyrax-root
-  become: yes
-  become_user: hyrax
-  changed_when: False
-
-- name: Add hydra-role-management to Gemfile
-  command: /usr/local/bin/bundle add hydra-role-management --version="~> 1.0"
-  args:
-    chdir: /var/www/hyrax/hyrax-root
-  become: yes
-  become_user: hyrax
-  changed_when: False
-
-- name: Run bundle install
-  command: /usr/local/bin/bundle install
-  args:
-    chdir: /var/www/hyrax/hyrax-root
-  become: yes
-  become_user: hyrax
-  changed_when: False
+- name: Upload the profile file
+  template:
+    src: dotprofile 
+    dest: /var/www/hyrax/.profile
+    owner: hyrax
+    group: puma
+    mode: u=rx,g=rx
 
 - name: Create the Hyrax database
   postgresql_db:
@@ -167,52 +128,16 @@
 - name: Copy database.yml configuration
   copy:
     src: database.yml
-    dest: /var/www/hyrax/hyrax-root/config/database.yml
+    dest: /var/www/hyrax/shared/config/database.yml
     owner: hyrax
     group: puma
     mode: u=r,g=r,o=
-
-# Run rails commands to install Hyrax
-
-- name: Run rails generate hyrax:install
-  command: /usr/local/bin/bundle exec rails generate hyrax:install -f
-  args:
-    chdir: /var/www/hyrax/hyrax-root
-  become: yes
-  become_user: hyrax
-  environment:
-    SECRET_KEY_BASE: "{{ hyrax_secret_key_base }}"
-    HYRAX_POSTGRESQL_PASSWORD: "{{ hyrax_postgresqldatabase_user_password }}"
-    RAILS_ENV: production
-
-- name: Run rails generate roles
-  command: /usr/local/bin/bundle exec rails generate roles
-  args:
-    chdir: /var/www/hyrax/hyrax-root
-  become: yes
-  become_user: hyrax
-  environment:
-    SECRET_KEY_BASE: "{{ hyrax_secret_key_base }}"
-    HYRAX_POSTGRESQL_PASSWORD: "{{ hyrax_postgresqldatabase_user_password }}"
-    RAILS_ENV: production
-
-- name: Run rails generate hyrax:riiif
-  command: /usr/local/bin/bundle exec rails generate hyrax:riiif
-  args:
-    chdir: /var/www/hyrax/hyrax-root
-    creates: /var/www/hyrax/hyrax-root/config/initializers/riiif.rb
-  become: yes
-  become_user: hyrax
-  environment:
-    SECRET_KEY_BASE: "{{ hyrax_secret_key_base }}"
-    HYRAX_POSTGRESQL_PASSWORD: "{{ hyrax_postgresqldatabase_user_password }}"
-    RAILS_ENV: production
 
 # Filesystem changes
 
 - name: Ensure log file is created and writeable
   file:
-    path: /var/www/hyrax/hyrax-root/log/production.log
+    path: /var/www/hyrax/shared/log/production.log
     state: touch
     owner: hyrax
     group: puma
@@ -222,91 +147,41 @@
 - name: Copy puma.rb configuration file
   copy:
     src: puma.rb
-    dest: /var/www/hyrax/hyrax-root/config/puma.rb
+    dest: /var/www/hyrax/shared/config/puma.rb
     owner: hyrax
     group: hyrax
     mode: a=r
 
-- name: Copy ability.rb configuration file
+- name: Copy mailer setting configuration file
   copy:
-   src: ability.rb
-   dest: /var/www/hyrax/hyrax-root/app/models/ability.rb
-   owner: hyrax
-   group: hyrax
-   mode: a=r
-
-- name: Copy fedora.yml configuration file
-  copy:
-    src: fedora.yml
-    dest: /var/www/hyrax/hyrax-root/config/fedora.yml
+    src: mail_initializer.rb
+    dest: /var/www/hyrax/shared/config/initializers/mail.rb
     owner: hyrax
     group: hyrax
     mode: a=r
-
-- name: Copy blacklight.yml to solr.yml
-  copy:
-    remote_src: yes
-    src: /var/www/hyrax/hyrax-root/config/blacklight.yml
-    dest: /var/www/hyrax/hyrax-root/config/solr.yml
-
-- name: Copy hyrax production configuration file
-  template:
-    src: production.rb
-    dest: /var/www/hyrax/hyrax-root/config/environments/production.rb
-    owner: hyrax
-    group: hyrax
-    mode: a=r
-
-- name: Copy hyrax.db initializer configuration file
-  template:
-    src: hyrax.rb
-    dest: /var/www/hyrax/hyrax-root/config/initializers/hyrax.rb
-    owner: hyrax
-    group: puma
-    mode: u=r,g=r,o=
-
-- name: Remove unneeded database migration
-  shell: rm /var/www/hyrax/hyrax-root/db/migrate/*_add_devise_to_users.rb
-  args:
-    warn: False
-  register: rm_migration_cmd
-  changed_when: rm_migration_cmd.rc == 0
-  failed_when: False
-
-- name: Run db migrate
-  command: /usr/local/bin/bundle exec rails db:migrate
-  args:
-    chdir: /var/www/hyrax/hyrax-root
-  become: yes
-  become_user: hyrax
-  environment:
-    SECRET_KEY_BASE: "{{ hyrax_secret_key_base }}"
-    HYRAX_POSTGRESQL_PASSWORD: "{{ hyrax_postgresqldatabase_user_password }}"
-    RAILS_ENV: production
-
-- name: Run the assets precompiler
-  command: /usr/local/bin/bundle exec rails assets:precompile
-  args:
-    chdir: /var/www/hyrax/hyrax-root
-  become: yes
-  become_user: hyrax
-
-- name: Create solr core
-  command: /opt/solr/bin/solr create_core -c blacklight-core -d /var/www/hyrax/hyrax-root/solr/config/
-  args:
-    creates: /var/solr/data/blacklight-core/core.properties
-  become: yes
-  become_user: solr
 
 - name: Let puma user write to tmp directory
   file:
-    path: /var/www/hyrax/hyrax-root/tmp
+    path: /var/www/hyrax/shared/tmp
     owner: hyrax
     group: puma
     mode: u=rwX,g=rwX,o=rX
     recurse: yes
 
+# Deploy with Ansistrano
+- name: Do a initial deploy
+  include_role:
+    name: ansistrano.deploy
+  become: yes
+  become_user: hyrax
+
 # Install and activate services
+- name: Create solr core
+  command: /opt/solr/bin/solr create_core -c blacklight-core -d /var/www/hyrax/current/solr/config/
+  args:
+    creates: /var/solr/data/blacklight-core/core.properties
+  become: yes
+  become_user: solr
 
 - name: Copy sidekiq service file
   template:
@@ -359,7 +234,7 @@
   when: ansible_distribution == "CentOS"
 
 - name: Run restorecon on public files
-  command: restorecon -R /var/www/hyrax/hyrax-root/public
+  command: restorecon -R /var/www/hyrax/current/public
   changed_when: False
   when: ansible_distribution == "CentOS"
 

@@ -12,8 +12,7 @@ These roles do not create the default collection types, the default administrati
 
 ```sh
 sudo su hyrax
-cd /var/www/hyrax/hyrax-root/
-export RAILS_ENV="production"
+cd /var/www/hyrax/current
 /usr/local/bin/bundle exec rails hyrax:default_collection_types:create
 /usr/local/bin/bundle exec rails hyrax:default_admin_set:create
 /usr/local/bin/bundle exec rails hyrax:workflow:load
@@ -28,6 +27,16 @@ This playbook is being tested against CentOS 7, Debian 9, and Ubuntu 18.04. A Va
 `install_hyrax_on_localhost.yml` is a test playbook which runs the provided roles against localhost.
 
 What does production-ready mean? A production ready instance of Hyrax should be secure. It should be regularly backed-up. It should be easy to update. Finally, it should have good performance.
+
+## Setup, Usage and Deployment
+Initial provisioning of Linux boxes is left outside the scope of this project. We assume a working CentOS 7, Debian 9 or Ubuntu 18.04 system. If you are installing this repo on the box itself, check out the repo in to a local directory, verify the variables in `vars/common.yml`, then do the following:
+
+```sh
+ansible-galaxy install -r requirements.yml
+ansible-playbook install_hyrax_on_localhost.yml
+```
+
+After initial setup you can use `ansible-playbook deploy.yml` and `ansible-playbook rollback.yml` to deploy and rollback various versions of the application code
 
 ## Security
 
@@ -104,6 +113,7 @@ FFmpeg is built with:
 |Variable|Notes|
 |---|---|
 |`aom_version` | The version of aom to download. Used to build FFmpeg. |
+|`bundler_version` | The version of the gem bundler to install. |
 |`cmake_checksum` | Verify the cmake-`{{ cmake_version }}`.tar.gz file, used by `get_url`. Format: `<algorithm>:<checksum>` |
 |`cmake_version` | The version of cmake to download. Used to build aom library for FFmpeg. |
 |`fdk_aac_checksum` | Verify the fdk-aac-`{{ fdk_aac_version }}`.tar.gz file, used by `get_url`. Format: `<algorithm>:<checksum>` |
@@ -122,8 +132,16 @@ FFmpeg is built with:
 |`hyrax_geonames_username`| The username to use when connecting to the Geonames service. |
 |`hyrax_postgresqldatabase_user_password` | The password used by hyrax to connect to Postgresql. Secure |
 |`hyrax_secret_key_base` | The secret used by Rails for sessions etc. Secure |
-|`hyrax_smtp_port`| The `hyrax_smtp_server`'s SMTP service is accessible at this port |
-|`hyrax_smtp_server`| Emails will be sent by STMP using this server. |
+|`hyrax_smtp_address` | Rails smtp address, defaults to smpt.example.com |
+|`hyrax_smtp_port` | Rails smtp port, defaults to 25 |
+|`hyrax_smtp_domain` | Rails smtp domain for mailer |
+|`hyrax_smtp_user_name` | Rails smtp username for mailer | 
+|`hyrax_smtp_password` | Rails smtp password for mailer |
+|`hyrax_smtp_authentication` | Rails authentication method for mailer | 
+|`hyrax_smtp_enable_starttls_auto` | Rails starttls setting for mailer |
+|`hyrax_smtp_openssl_verify_mode` | Rails openssl verify mode for mailer |
+|`hyrax_smtp_ssl` | Rails ssl setting for mailer | 
+|`hyrax_smtp_tls` | Rails tls setting for mailer |
 |`imagemagick_package` | The name used by the `package` module when installing ImageMagick. Per-Distro |
 |`java_openjdk_package` | The name used by the `package` module when installing the Java JDK. Per-Distro |
 |`lame_checksum` | Verify the lame-`{{ lame_version }}`.tar.gz file, used by `get_url`. Format: `<algorithm>:<checksum>` |

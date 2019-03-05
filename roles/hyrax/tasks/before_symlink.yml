@@ -1,0 +1,10 @@
+---
+- name: Install bundle
+  shell: bash -l -c "cd {{ ansistrano_release_path.stdout }} && bundle install --deployment --without=\"development test\""
+
+- name: Precompile assets
+  command: bash -l -c "cd {{ ansistrano_release_path.stdout }}  && source /var/www/hyrax/.profile && bundle exec rake assets:precompile"
+
+- name: Migrate
+  command: bash -l -c "cd {{ ansistrano_release_path.stdout }} && source /var/www/hyrax/.profile && bundle exec rake db:migrate"
+  run_once: true

@@ -1,6 +1,23 @@
 ---
 # Common variables for all hosts
+ansistrano_deploy_to: "/var/www/hyrax" # Base path to deploy to.
+ansistrano_keep_releases: 5 # Releases to keep after a new deployment. See "Pruning old releases".
+ansistrano_shared_paths:
+  - log
+  - tmp
+  - public/system
+  - vendor/bundle
+ansistrano_shared_files:
+  - config/database.yml
+  - config/puma.rb
+ansistrano_deploy_via: "git"
+ansistrano_git_repo: https://github.com/samvera/hyku.git
+ansistrano_git_branch: master # What version of the repository to check out. This can be the full 40-character SHA-1 hash, the literal string HEAD, a branch name, or a tag name
+#ansistrano_git_identity_key_path: "keys/deploy" # If specified this file is copied over and used as the identity key for the git commands, path is relative to the playbook in which it is used
+ansistrano_before_symlink_tasks_file: "{{ playbook_dir }}/roles/hyrax/tasks/before_symlink.yml"
+ansistrano_after_symlink_tasks_file: "{{ playbook_dir }}/roles/hyrax/tasks/after_symlink.yml"
 aom_version: "a1615ed01a112432825f231a1fa47295cff127b4"
+bundler_version: 1.17.3
 cmake_checksum: sha256:563a39e0a7c7368f81bfa1c3aff8b590a0617cdfe51177ddc808f66cc0866c76
 cmake_version: "3.13.4"
 fdk_aac_checksum: sha1:a98a3f2b0658683c51739f6362f496e3d7d2c073
@@ -19,8 +36,16 @@ hyrax_from_email_address: "no_reply@example.com"
 hyrax_geonames_username: "hyrax_ansible_test"
 hyrax_postgresqldatabase_user_password: insecure_password
 hyrax_secret_key_base: insecure_key_base
-hyrax_smtp_port: 25
-hyrax_smtp_server: "smtp.example.com"
+hyrax_smtp_address: "smtp.example.com"
+hyrax_smtp_port: 25 
+hyrax_smtp_domain: "example.com"
+hyrax_smtp_user_name: 
+hyrax_smtp_password: 
+hyrax_smtp_authentication: false 
+hyrax_smtp_enable_starttls_auto: false 
+hyrax_smtp_openssl_verify_mode: false
+hyrax_smtp_ssl: false 
+hyrax_smtp_tls: false
 hyrax_version: "2.4.1"
 lame_checksum: sha1:64c53b1a4d493237cef5e74944912cd9f98e618d
 lame_version: "3.100"

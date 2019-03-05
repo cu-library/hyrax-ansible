@@ -16,7 +16,7 @@
 (echo -n " size: " &&  du -hs "{{ hyrax_backups_directory }}/current/redis" | cut -f 1) >> /var/log/hyrax/backup.log 2>&1
 
 # Hyrax
-(echo -n "$(date --rfc-3339=seconds) - creating hyrax backup - " && tar --exclude=log --exclude=tmp/cache --exclude=tmp/pids --exclude=tmp/sessions --exclude=tmp/sockets -cf "{{ hyrax_backups_directory }}/current/hyrax/hyrax-root.tar" -C /var/www/hyrax/ hyrax-root) >> /var/log/hyrax/backup.log 2>&1
+(echo -n "$(date --rfc-3339=seconds) - creating hyrax backup - " && tar --exclude=log --exclude=tmp/cache --exclude=tmp/pids --exclude=tmp/sessions --exclude=tmp/sockets -cf "{{ hyrax_backups_directory }}/current/hyrax/current.tar" -C /var/www/hyrax/ current) >> /var/log/hyrax/backup.log 2>&1
 (echo -n " size: " &&  du -hs "{{ hyrax_backups_directory }}/current/hyrax" | cut -f 1) >> /var/log/hyrax/backup.log 2>&1
 
 # All together, now!
@@ -30,4 +30,4 @@ datestamp=$(date --rfc-3339=date)
 (echo -n "$(date --rfc-3339=seconds) - deleting temporary fcrepo data - " && rm -rf {{ hyrax_backups_directory }}/current/fcrepo/* && echo " done") >> /var/log/hyrax/backup.log 2>&1
 (echo -n "$(date --rfc-3339=seconds) - deleting temporary postgres data - " && rm -f {{ hyrax_backups_directory }}/current/postgres/backup.sql && echo " done") >> /var/log/hyrax/backup.log 2>&1
 (echo -n "$(date --rfc-3339=seconds) - deleting temporary redis data - " && rm -f {{ hyrax_backups_directory }}/current/redis/dump.rdb && echo " done") >> /var/log/hyrax/backup.log 2>&1
-(echo -n "$(date --rfc-3339=seconds) - deleting temporary hyrax data - " && rm -f {{ hyrax_backups_directory }}/current/hyrax/hyrax-root.tar && echo " done") >> /var/log/hyrax/backup.log 2>&1
+(echo -n "$(date --rfc-3339=seconds) - deleting temporary hyrax data - " && rm -f {{ hyrax_backups_directory }}/current/hyrax/current.tar && echo " done") >> /var/log/hyrax/backup.log 2>&1
