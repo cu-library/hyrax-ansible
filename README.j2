@@ -13,9 +13,7 @@ These roles do not create the default collection types, the default administrati
 ```sh
 sudo su hyrax
 cd /var/www/hyrax/current
-/usr/local/bin/bundle exec rails hyrax:default_collection_types:create
-/usr/local/bin/bundle exec rails hyrax:default_admin_set:create
-/usr/local/bin/bundle exec rails hyrax:workflow:load
+/usr/local/bin/bundle exec rails hyrax:default_collection_types:create hyrax:default_admin_set:create hyrax:workflow:load
 ```
 
 These roles also do not create admin users or any work types. See https://github.com/samvera/hyrax#generate-a-work-type and https://github.com/samvera/hyrax/wiki/Making-Admin-Users-in-Hyrax.
@@ -112,6 +110,14 @@ FFmpeg is built with:
 {% raw %}
 |Variable|Notes|
 |---|---|
+|`ansistrano_deploy_to` | Destination for app deployment, defaults to: "/var/www/hyrax" |
+|`ansistrano_keep_releases` | Number of old releases to keep, defaults to: 5 |
+|`ansistrano_shared_paths` | Array of shared paths that are symlinked to each release |
+|`ansistrano_shared_files` | Array of shared files that are symlinked to each relaese |
+|`ansistrano_deploy_via` | Ansistrano tool for depoyment, can by rsync or git, defaults to git |
+|`ansistrano_git_repo` | Repo of the application to deploy, defaults to: https://github.com/samvera/hyku.git |
+|`ansistrano_git_branch` | What version of the repository to check out. This can be the full 40-character SHA-1 hash, the literal string HEAD, a branch name, or a tag name. Defaults to: master |
+|`ansistrano_git_identity_key_path` | If specified this file is copied over and used as the identity key for the git commands, path is relative to the playbook in which it is used |
 |`aom_version` | The version of aom to download. Used to build FFmpeg. |
 |`bundler_version` | The version of the gem bundler to install. |
 |`cmake_checksum` | Verify the cmake-`{{ cmake_version }}`.tar.gz file, used by `get_url`. Format: `<algorithm>:<checksum>` |
