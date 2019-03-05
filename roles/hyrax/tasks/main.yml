@@ -153,7 +153,7 @@
     mode: a=r
 
 - name: Copy mailer setting configuration file
-  copy:
+  template:
     src: mail_initializer.rb
     dest: /var/www/hyrax/shared/config/initializers/mail.rb
     owner: hyrax
@@ -375,3 +375,10 @@
     owner: root
     group: root
     mode: u=rw,g=r,o=r
+
+- name: Configure initial collection types and workflows
+  command: "bundle exec rails hyrax:default_collection_types:create hyrax:default_admin_set:create hyrax:workflow:load"
+  become: yes
+  become_user: hyrax
+
+  
