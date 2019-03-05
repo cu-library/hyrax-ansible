@@ -54,19 +54,19 @@
     group: puma
     mode: u=rwX,g=rwX,o=rX
 
- - name: Create the shared directories
-   file:
-     path: "{{item}}" 
-     state: directory
-     owner: hyrax
-     group: puma
-     mode: u=rwX,g=rwX,o=rX
-   with_items:
-     - /var/www/hyrax/shared/config/initializers
-     - /var/www/hyrax/shared/log
-     - /var/www/hyrax/shared/tmp
-     - /var/www/hyrax/shared/public/system
-     - /var/www/hyrax/shared/vendor/bundle
+- name: Create the shared directories
+  file:
+    path: "{{item}}" 
+    state: directory
+    owner: hyrax
+    group: puma
+    mode: u=rwX,g=rwX,o=rX
+  with_items:
+    - /var/www/hyrax/shared/config/initializers
+    - /var/www/hyrax/shared/log
+    - /var/www/hyrax/shared/tmp
+    - /var/www/hyrax/shared/public/system
+    - /var/www/hyrax/shared/vendor/bundle
 
 - name: Upload the env file
   template:
