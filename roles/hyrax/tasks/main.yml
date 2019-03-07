@@ -377,17 +377,9 @@
     mode: u=rw,g=r,o=r
 
 - name: Configure initial collection types and workflows
-  command: "/usr/local/bin/bundle exec rails hyrax:default_collection_types:create hyrax:default_admin_set:create hyrax:workflow:load"
+  command: "bash -l -c 'bundle exec rails hyrax:default_collection_types:create hyrax:default_admin_set:create hyrax:workflow:load'"
   args:
     chdir: "{{ ansistrano_deploy_to }}/current"
   become: yes
   become_user: hyrax
   changed_when: False
-  environment:
-    SECRET_KEY_BASE: "{{ hyrax_secret_key_base }}"
-    HYRAX_POSTGRESQL_PASSWORD: "{{ hyrax_postgresqldatabase_user_password }}"
-    RAILS_ENV: production
-  
-
-
-  

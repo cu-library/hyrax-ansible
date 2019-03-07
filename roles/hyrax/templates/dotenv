@@ -1,7 +1,9 @@
-SECRET_KEY_BASE={{ hyrax_secret_key_base }}
+FEDORA_URL=http://localhost:8080/fcrepo/rest
 HYRAX_POSTGRESQL_PASSWORD={{ hyrax_postgresqldatabase_user_password }}
 RAILS_ENV=production
-SETTINGS__MULTITENANCY__ENABLED=false
+SECRET_KEY_BASE={{ hyrax_secret_key_base }}
 SETTINGS__ACTIVE_JOB__QUEUE_ADAPTER=sidekiq
 SETTINGS__CONTACT_EMAIL={{ hyrax_from_email_address }}
 SETTINGS__DEVISE__INVITATION_FROM_EMAIL={{ hyrax_from_email_address }}
+SETTINGS__MULTITENANCY__ENABLED=false
+SOLR_URL=http://localhost:8983/solr/blacklight-core
