@@ -73,6 +73,11 @@
   changed_when: false
   when: ansible_distribution == "CentOS"
 
+- name: Set setsebool tomcat_can_network_connect_db on
+  command: /usr/sbin/setsebool -P tomcat_can_network_connect_db on
+  changed_when: false
+  when: ansible_distribution == "CentOS"
+
 - name: Overwrite the Tomcat users file
   template:
     src: tomcat-users.xml
