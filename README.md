@@ -14,7 +14,9 @@ This playbook is being tested against the latest versions of CentOS 7, Debian 9,
 
 All roles assume services (Nginx, Fedora 4, PostgreSQL) are installed on one machine and communicate using UNIX sockets or the loopback interface. For large deployments, you'll want to edit these roles so that services are deployed on different machines and that communication between them is encrypted.
 
-These roles also do not create admin users. See https://github.com/samvera/hyrax/wiki/Making-Admin-Users-in-Hyrax.
+These roles also do not create admin users. See https://github.com/samvera/hyrax/wiki/Making-Admin-Users-in-Hyrax. But it does run the following to set up basic data structures needed for Hyrax / Hyku.
+
+`bundle exec rails hyrax:default_collection_types:create hyrax:default_admin_set:create hyrax:workflow:load`
 
 These roles assume that an external SMTP server will be used. Some environments might want to use use a local mail transfer agent. More information can be found in the Hyrax management guide: https://github.com/samvera/hyrax/wiki/Hyrax-Management-Guide#mailers.
 
