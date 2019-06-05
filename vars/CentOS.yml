@@ -1,5 +1,6 @@
 ---
 # Variables for CentOS.
+clamav_devel_package: clamav-devel
 imagemagick_package: ImageMagick
 java_openjdk_package: java-1.8.0-openjdk
 postgresql_contrib_package: postgresql-contrib

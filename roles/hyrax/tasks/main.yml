@@ -23,6 +23,17 @@
     name: "{{ sqlite_devel_package }}"
     state: present
 
+- name: Enable EPEL repository
+  yum:
+    name: epel-release
+    state: present
+  when: ansible_distribution == "CentOS"
+
+- name: Install clamav devel package
+  package: 
+    name: "{{ clamav_devel_package }}"
+    state: present
+
 # Hyrax groundwork
 
 - name: Create the hyrax user

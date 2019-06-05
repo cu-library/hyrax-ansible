@@ -1,5 +1,6 @@
 ---
 # Variables for Debian.
+clamav_devel_package: libclamav-dev
 imagemagick_package: imagemagick
 java_openjdk_package: openjdk-8-jdk
 postgresql_contrib_package: postgresql-contrib
