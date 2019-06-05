@@ -6,4 +6,5 @@ SETTINGS__ACTIVE_JOB__QUEUE_ADAPTER=sidekiq
 SETTINGS__CONTACT_EMAIL={{ hyrax_from_email_address }}
 SETTINGS__DEVISE__INVITATION_FROM_EMAIL={{ hyrax_from_email_address }}
 SETTINGS__MULTITENANCY__ENABLED=false
+SETTINGS__FITS_PATH=/opt/fits/fits.sh
 SOLR_URL=http://localhost:8983/solr/blacklight-core
