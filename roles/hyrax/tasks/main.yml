@@ -172,8 +172,9 @@
 - name: Do a initial deploy
   include_role:
     name: ansistrano.deploy
-  become: yes
-  become_user: hyrax
+    apply:
+      become: yes
+      become_user: hyrax
 
 # Install and activate services
 - name: Create solr core
