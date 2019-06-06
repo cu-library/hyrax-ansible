@@ -25,8 +25,8 @@ Group=puma
 # https://www.mikeperham.com/2018/04/25/taming-rails-memory-bloat/
 Environment=MALLOC_ARENA_MAX=2
 Environment=WEB_CONCURRENCY={{ puma_web_concurency }}
+Environment=PATH={{ ffmpeg_bin_dir }}:/usr/local/sbin:/sbin:/bin:/usr/sbin:/usr/bin:/root/bin
 EnvironmentFile=/var/www/hyrax/.env
-EnvironmentFile=/etc/profile.d/add_ffmpeg_to_path.sh
 
 [Install]
 WantedBy=multi-user.target
