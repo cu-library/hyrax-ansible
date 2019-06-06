@@ -25,7 +25,7 @@ production:
   adapter: postgresql
   encoding: utf8
   database: hyrax
-  pool: 5
+  pool: {{ hyrax_database_pool_size }} 
   username: hyrax
   password: <%= ENV["HYRAX_POSTGRESQL_PASSWORD"] %>
 

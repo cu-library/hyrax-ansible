@@ -137,7 +137,7 @@
   meta: flush_handlers
 
 - name: Copy database.yml configuration
-  copy:
+  template:
     src: database.yml
     dest: /var/www/hyrax/shared/config/database.yml
     owner: hyrax

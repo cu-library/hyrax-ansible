@@ -134,6 +134,7 @@ FFmpeg is built with:
 |`fits_checksum` | Verify the fits-`{{ fits_version }}`.zip file, used by `get_url`. Format: `<algorithm>:<checksum>` | `{{ fits_checksum }}` |
 |`fits_version` | The version of FITS to download. | `{{ fits_version }}` |
 |`hyrax_backups_directory` | The location where backup files will be created. | `{{ hyrax_backups_directory }}` |
+|`hyrax_database_pool_size` | The size of the database pool. | `{{ hyrax_database_pool_size }}` |
 |`hyrax_from_email_address ` | The email address to use for the from field when sending emails from Hyrax. | `{{ hyrax_from_email_address }}` |
 |`hyrax_postgresqldatabase_user_password` | **Secure.** The password used by hyrax to connect to Postgresql. | `{{ hyrax_postgresqldatabase_user_password }}` |
 |`hyrax_secret_key_base` | **Secure.** The secret used by Rails for sessions etc. | `{{ hyrax_secret_key_base }}` |

@@ -31,6 +31,7 @@ ffmpeg_version: "4.1.1"
 fits_checksum: sha1:24ebec8157dda63bf60bd3009a6e8961b8f35b05
 fits_version: "1.4.0"
 hyrax_backups_directory: /var/backups # No trailing slash!
+hyrax_database_pool_size: 30 
 hyrax_from_email_address: test@example.com
 hyrax_postgresqldatabase_user_password: insecure_password
 hyrax_secret_key_base: insecure_key_base
