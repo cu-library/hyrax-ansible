@@ -11,6 +11,7 @@ ansistrano_keep_releases: 5 # Releases to keep after a new deployment. See "Prun
 ansistrano_shared_files:
   - config/database.yml
   - config/puma.rb
+  - config/initializers/mail.rb
 ansistrano_shared_paths:
   - log
   - public/system
