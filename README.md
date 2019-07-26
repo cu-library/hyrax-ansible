@@ -96,7 +96,7 @@ FFmpeg is built with:
 * cmake: 3.15.0 (Set using `cmake_version` variable.)
 * NASM 2.14.02 (Set using `nasm_version` variable.)
 * Yasm 1.3.0 (Set using `yasm_version` variable.)
-* x264: 20190725-2245-stable (Set using `x264_version` variable.)
+* x264: 20190227-2245-stable (Set using `x264_version` variable.)
 * x265: 3.1.1 (Set using `x265_version` variable.)
 * fdk-aac: 2.0.0 (Set using `fdk_aac_version` variable.)
 * lame: 3.100 (Set using `lame_version` variable.)
@@ -186,8 +186,8 @@ FFmpeg is built with:
 |`tomcat_user_password` | **Secure.** The password used to build the tomcat-users.xml file. | `insecure_password` |
 |`tomcat_user` | **Per-Distro** The user which runs the tomcat service. ||
 |`tomcat_users_conf_path` | **Per-Distro** The path for tomcat-users.xml. ||
-|`x264_checksum` | Verify the x264-snapshot-`20190725-2245-stable`.tar.bz2 file, used by `get_url`. Format: `<algorithm>:<checksum>` | `sha1:69d904efb306d98d3bfc683864c988f2d7bcc334` |
-|`x264_version` | The version of x264 to download. Used to build FFmpeg. | `20190725-2245-stable` |
+|`x264_checksum` | Verify the x264-snapshot-`20190227-2245-stable`.tar.bz2 file, used by `get_url`. Format: `<algorithm>:<checksum>` | `sha1:95328420e69d39c2055b34289b7208cd4b39fec2` |
+|`x264_version` | The version of x264 to download. Used to build FFmpeg. | `20190227-2245-stable` |
 |`x265_checksum` | Verify the x265_`3.1.1`.tar.gz file, used by `get_url`. Format: `<algorithm>:<checksum>` | `md5:248a4cdbd93e9a493c78ef0c07863b34` |
 |`x265_version` | The version of x265 to download. Used to build FFmpeg. | `3.1.1` |
 |`yasm_checksum` | Verify the yasm-`1.3.0`.tar.gz file, used by `get_url`. Format: `<algorithm>:<checksum>` | `sha1:b7574e9f0826bedef975d64d3825f75fbaeef55e` |

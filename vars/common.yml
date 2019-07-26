@@ -69,8 +69,8 @@ solr_checksum: sha512:a785e3fae1f46423fe857b443760b5007e484b3f23e0137f42689515c5
 solr_mirror: https://mirror.csclub.uwaterloo.ca/apache # No trailing slash!
 solr_version: "7.7.2"
 tomcat_user_password: insecure_password
-x264_checksum: sha1:69d904efb306d98d3bfc683864c988f2d7bcc334
-x264_version: 20190725-2245-stable
+x264_checksum: sha1:95328420e69d39c2055b34289b7208cd4b39fec2
+x264_version: 20190227-2245-stable
 x265_checksum: md5:248a4cdbd93e9a493c78ef0c07863b34
 x265_version: "3.1.1"
 yasm_checksum: sha1:b7574e9f0826bedef975d64d3825f75fbaeef55e
