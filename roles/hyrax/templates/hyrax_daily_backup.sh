@@ -30,4 +30,4 @@ datestamp=$(date --rfc-3339=date)
 (echo -n "$(date --rfc-3339=seconds) - deleting temporary fcrepo data - " && rm -rf {{ hyrax_backups_directory }}/current/fcrepo/* && echo " done") >> /var/log/hyrax/backup.log 2>&1
 (echo -n "$(date --rfc-3339=seconds) - deleting temporary postgres data - " && rm -f {{ hyrax_backups_directory }}/current/postgres/backup.sql && echo " done") >> /var/log/hyrax/backup.log 2>&1
 (echo -n "$(date --rfc-3339=seconds) - deleting temporary redis data - " && rm -f {{ hyrax_backups_directory }}/current/redis/dump.rdb && echo " done") >> /var/log/hyrax/backup.log 2>&1
-(echo -n "$(date --rfc-3339=seconds) - deleting temporary hyrax data - " && rm -f {{ hyrax_backups_directory }}/current/hyrax/current.tar && echo " done") >> /var/log/hyrax/backup.log 2>&1
+(echo -n "$(date --rfc-3339=seconds) - deleting temporary hyrax data - " && rm -f {{ hyrax_backups_directory }}/current/hyrax/hyrax.tar && echo " done") >> /var/log/hyrax/backup.log 2>&1
