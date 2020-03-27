@@ -34,6 +34,16 @@
     name: "{{ clamav_devel_package }}"
     state: present
 
+- name: Install libxslt devel package
+  package:
+    name: "{{ libxslt_devel_package }}"
+    state: present
+
+- name: Install libxml2 devel package
+  package:
+    name: "{{ libxml2_devel_package }}"
+    state: present
+
 # Hyrax groundwork
 
 - name: Create the hyrax user

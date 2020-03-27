@@ -3,6 +3,8 @@
 clamav_devel_package: libclamav-dev
 imagemagick_package: imagemagick
 java_openjdk_package: openjdk-8-jdk
+libxslt_devel_package: libxslt-dev
+libxml2_devel_package: libxml2-dev
 postgresql_contrib_package: postgresql-contrib
 postgresql_devel_package: postgresql-all
 postgresql_server_package: postgresql
