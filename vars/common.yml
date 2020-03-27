@@ -18,7 +18,7 @@ ansistrano_shared_paths:
   - tmp
   - vendor/bundle
 aom_version: "4eb1e7795b9700d532af38a2d9489458a8038233"
-bundler_version: "1.17.3"
+bundler_version: "2.1.4"
 cmake_checksum: sha256:b44685227b9f9be103e305efa2075a8ccf2415807fbcf1fc192da4d36aacc9f5
 cmake_version: "3.17.0"
 fdk_aac_checksum: sha1:3684ed4081d006bb476215ccb632b0f241892edf
