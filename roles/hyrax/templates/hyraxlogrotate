@@ -5,3 +5,13 @@
     dateext
     missingok
 }
+
+/var/www/hyrax/shared/log/production.log {
+    weekly
+    missingok
+    rotate 24
+    compress
+    delaycompress
+    notifempty
+    copytruncate
+}
