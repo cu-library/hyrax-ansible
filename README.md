@@ -115,7 +115,7 @@ FFmpeg is built with:
 |`ansistrano_shared_paths` | Array of shared paths that are symlinked to each release. | `log, public/system, tmp, vendor/bundle` |
 |`ansistrano_shared_files` | Array of shared files that are symlinked to each release. | `config/database.yml, config/puma.rb, config/initializers/mail.rb`|
 |`ansistrano_deploy_via` | Ansistrano tool for depoyment, can by rsync or git. | `git` |
-|`ansistrano_git_repo` | Repo of the application to deploy | `https://github.com/samvera/hyku.git` |
+|`ansistrano_git_repo` | Repo of the application to deploy | `https://github.com/samvera/hyku` |
 |`ansistrano_git_branch` | What version of the repository to check out. This can be the full 40-character SHA-1 hash, the literal string HEAD, a branch name, or a tag name. | `master` |
 |`ansistrano_git_identity_key_path` | If specified this file is copied over and used as the identity key for the git commands, path is relative to the playbook in which it is used ||
 |`aom_version` | The version of aom to download. Used to build FFmpeg. | `4eb1e7795b9700d532af38a2d9489458a8038233` |
