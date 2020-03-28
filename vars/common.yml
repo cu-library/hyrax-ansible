@@ -6,7 +6,7 @@ ansistrano_deploy_to: "/var/www/hyrax" # Base path to deploy to.
 ansistrano_deploy_via: "git"
 ansistrano_git_branch: master # What version of the repository to check out. This can be the full 40-character SHA-1 hash, the literal string HEAD, a branch name, or a tag name
 #ansistrano_git_identity_key_path: "keys/deploy" # If specified this file is copied over and used as the identity key for the git commands, path is relative to the playbook in which it is used
-ansistrano_git_repo: https://github.com/samvera/hyku
+ansistrano_git_repo: https://github.com/samvera/hyku.git
 ansistrano_keep_releases: 5 # Releases to keep after a new deployment. See "Pruning old releases".
 ansistrano_shared_files:
   - config/database.yml
