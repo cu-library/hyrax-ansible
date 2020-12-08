@@ -36,7 +36,7 @@
     creates: /usr/local/bin/ruby-install
 
 - name: Install ruby
-  command: /usr/local/bin/ruby-install ruby --system {{ ruby_version }} --sha1 {{ ruby_tarbz2_sha256_checksum }}
+  command: /usr/local/bin/ruby-install ruby --system {{ ruby_version }} --sha256 {{ ruby_tarbz2_sha256_checksum }}
   args:
     creates: /usr/local/bin/ruby
 
