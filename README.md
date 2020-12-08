@@ -23,7 +23,7 @@ These roles assume that an external SMTP server will be used. Some environments 
 `install_hyrax_on_localhost.yml` is a test playbook which runs the provided roles against localhost.
 
 ## Setup, Usage and Deployment
-Initial provisioning of Linux boxes is left outside the scope of this project. We assume a working CentOS 7, Debian 9 or Ubuntu 18.04 system. If you are installing this repository on the box itself, check out the repository in to a local directory, verify the variables in `vars/common.yml`, then do the following:
+Initial provisioning of Linux boxes is left outside the scope of this project. We assume a working CentOS 8, Debian 10 or Ubuntu 20.04.1 system. If you are installing this repository on the box itself, check out the repository in to a local directory, verify the variables in `vars/common.yml`, then do the following:
 
 ```sh
 ansible-galaxy install -r requirements.yml
@@ -85,26 +85,26 @@ Node.js latest version 10.x is installed using the NodeSource repositories.
 Some software is installed at a specific version:
 
 * Fedora Repository 4.7.5 (Set using `fedora4_version` variable.)
-* Solr 7.7.2 (Set using `solr_version` variable.)
-* Ruby 2.6.5 (Set using `ruby_version` variable.)
-* FFmpeg 4.2.2 (Set using `ffmpeg_version` variable.)
+* Solr 8.7.0 (Set using `solr_version` variable.)
+* Ruby 2.7.2 (Set using `ruby_version` variable.)
+* FFmpeg 4.3.1 (Set using `ffmpeg_version` variable.)
 * FITS 1.5.0 (Set using `fits_version` variable.)
 
 FFmpeg is built with:
 
-* cmake: 3.17.0 (Set using `cmake_version` variable.)
-* NASM 2.14.02 (Set using `nasm_version` variable.)
+* cmake: 3.19.1 (Set using `cmake_version` variable.)
+* NASM 2.15.05 (Set using `nasm_version` variable.)
 * Yasm 1.3.0 (Set using `yasm_version` variable.)
-* x264: 20190227-2245-stable (Set using `x264_version` variable.)
-* x265: 3.3 (Set using `x265_version` variable.)
+* x264: 20191217-2245-stable (Set using `x264_version` variable.)
+* x265: 3.4 (Set using `x265_version` variable.)
 * fdk-aac: 2.0.1 (Set using `fdk_aac_version` variable.)
 * lame: 3.100 (Set using `lame_version` variable.)
 * opus: 1.3.1 (Set using `opus_version` variable.)
 * libogg: 1.3.4 (Set using `libogg_version` variable.)
-* libvorbis: 1.3.6 (Set using `libvorbis_version` variable.)
-* aom: 4eb1e7795b9700d532af38a2d9489458a8038233 (Set using `aom_version` variable.) Falling back to using a commit instead of a tagged release. The tarballs from https://aomedia.googlesource.com/aom/ are generated when requested for a particular tag. They are not stable releases, and as such do not have stable checksums. A checksum is not provided.
-* libvpx: 1.8.2 (Set using `libvpx_version` variable.)
-* libass: 0.14.0 (Set using `libass_version` variable.)
+* libvorbis: 1.3.7 (Set using `libvorbis_version` variable.)
+* aom: c52d9602fef3094c880520b5af621ad8db0813fd (Set using `aom_version` variable.) Falling back to using a commit instead of a tagged release. The tarballs from https://aomedia.googlesource.com/aom/ are generated when requested for a particular tag. They are not stable releases, and as such do not have stable checksums. A checksum is not provided.
+* libvpx: 1.9.0 (Set using `libvpx_version` variable.)
+* libass: 0.15.0 (Set using `libass_version` variable.)
 
 ## Variables
 
@@ -115,22 +115,22 @@ FFmpeg is built with:
 |`ansistrano_shared_paths` | Array of shared paths that are symlinked to each release. | `log, public/system, tmp, vendor/bundle` |
 |`ansistrano_shared_files` | Array of shared files that are symlinked to each release. | `config/database.yml, config/puma.rb, config/initializers/mail.rb`|
 |`ansistrano_deploy_via` | Ansistrano tool for depoyment, can by rsync or git. | `git` |
-|`ansistrano_git_repo` | Repo of the application to deploy | `https://github.com/samvera/hyku` |
+|`ansistrano_git_repo` | Repo of the application to deploy | `https://github.com/samvera/hyku.git` |
 |`ansistrano_git_branch` | What version of the repository to check out. This can be the full 40-character SHA-1 hash, the literal string HEAD, a branch name, or a tag name. | `master` |
 |`ansistrano_git_identity_key_path` | If specified this file is copied over and used as the identity key for the git commands, path is relative to the playbook in which it is used ||
-|`aom_version` | The version of aom to download. Used to build FFmpeg. | `4eb1e7795b9700d532af38a2d9489458a8038233` |
+|`aom_version` | The version of aom to download. Used to build FFmpeg. | `c52d9602fef3094c880520b5af621ad8db0813fd` |
 |`bundler_version` | The version of the gem bundler to install. | `2.1.4` |
-|`cmake_checksum` | Verify the cmake-`3.17.0`.tar.gz file, used by `get_url`. Format: `<algorithm>:<checksum>` | `sha256:b44685227b9f9be103e305efa2075a8ccf2415807fbcf1fc192da4d36aacc9f5` |
-|`cmake_version` | The version of cmake to download. Used to build aom library for FFmpeg. | `3.17.0` |
-|`fdk_aac_checksum` | Verify the fdk-aac-`2.0.1`.tar.gz file, used by `get_url`. Format: `<algorithm>:<checksum>` | `sha1:3684ed4081d006bb476215ccb632b0f241892edf` |
+|`cmake_checksum` | Verify the cmake-`3.19.1`.tar.gz file, used by `get_url`. Format: `<algorithm>:<checksum>` | `sha256:587fb2d882214511f4b260329800de7903eba7827498f06a0dee234ed579bdc3` |
+|`cmake_version` | The version of cmake to download. Used to build aom library for FFmpeg. | `3.19.1` |
+|`fdk_aac_checksum` | Verify the fdk-aac-`2.0.1`.tar.gz file, used by `get_url`. Format: `<algorithm>:<checksum>` | `sha256:a4142815d8d52d0e798212a5adea54ecf42bcd4eec8092b37a8cb615ace91dc6` |
 |`fdk_aac_version` | The version of fdk-aac to download. Used to build FFmpeg. | `2.0.1` |
-|`fedora4_checksum` | Verify the fcrepo-webapp-`4.7.5`.war file, used by `get_url` module. Format: `<algorithm>:<checksum>` | `sha1:243df71ceef8dca9309f230f2abb31c195368c5c` |
+|`fedora4_checksum` | Verify the fcrepo-webapp-`4.7.5`.war file, used by `get_url` module. Format: `<algorithm>:<checksum>` | `sha256:df37bdbc41879e1a1697acbf409f19df837351f7179a03c98a38b9f71f6bc173` |
 |`fedora4_postgresqldatabase_user_password` | **Secure.** The password used by fedora4 to connect to Postgresql. | `insecure_password` |
 |`fedora4_version` | The version of Fedora 4 to download. | `4.7.5` |
-|`ffmpeg_checksum` | Verify the ffmpeg-`4.2.2`.tar.bz2 file, used by `get_url`. Format: `<algorithm>:<checksum>` | `sha1:77c9724bde4c6e3ef21ab954c0572ac45e61c3e5` |
+|`ffmpeg_checksum` | Verify the ffmpeg-`4.3.1`.tar.bz2 file, used by `get_url`. Format: `<algorithm>:<checksum>` | `sha256:f4a4ac63946b6eee3bbdde523e298fca6019d048d6e1db0d1439a62cea65f0d9` |
 |`ffmpeg_compile_dir` | The directory where ffmpeg sources will be downloaded, unarchived, and compiled. | `/opt/ffmpeg` |
-|`ffmpeg_version` | The version of FFmpeg to download. | `4.2.2` |
-|`fits_checksum` | Verify the fits-`1.5.0`.zip file, used by `get_url`. Format: `<algorithm>:<checksum>` | `sha1:8e61b4b80f0098141bb8d764e6fbdc43675c7d6e` |
+|`ffmpeg_version` | The version of FFmpeg to download. | `4.3.1` |
+|`fits_checksum` | Verify the fits-`1.5.0`.zip file, used by `get_url`. Format: `<algorithm>:<checksum>` | `sha256:1378a78892db103b3a00e45c510b58c70e19a1a401b3720ff4d64a51438bfe0b` |
 |`fits_version` | The version of FITS to download. | `1.5.0` |
 |`hyrax_backups_directory` | The location where backup files will be created. | `/var/backups` |
 |`hyrax_database_pool_size` | The size of the database pool. | `30` |
@@ -149,20 +149,20 @@ FFmpeg is built with:
 |`hyrax_smtp_tls` | Rails tls setting for mailer. | `False` |
 |`imagemagick_package` | **Per-Distro** The name used by the `package` module when installing ImageMagick. ||
 |`java_openjdk_package` | **Per-Distro** The name used by the `package` module when installing the Java JDK. ||
-|`lame_checksum` | Verify the lame-`3.100`.tar.gz file, used by `get_url`. Format: `<algorithm>:<checksum>` | `sha1:64c53b1a4d493237cef5e74944912cd9f98e618d` |
+|`lame_checksum` | Verify the lame-`3.100`.tar.gz file, used by `get_url`. Format: `<algorithm>:<checksum>` | `sha256:ddfe36cab873794038ae2c1210557ad34857a4b6bdc515785d1da9e175b1da1e` |
 |`lame_version` | The version of lame to download. Used to build FFmpeg. | `3.100` |
-|`libass_checksum` | Verify the libass-`1.3.0`.tar.gz file, used by `get_url`. Format: `<algorithm>:<checksum>` | `sha1:aec905e8b1db9a9762f90ec11037807fcfe714d1` |
-|`libass_version` | The version of libass to download. Used to build FFmpeg. | `0.14.0` |
-|`libogg_checksum` | Verify the libogg-`1.3.4`.tar.gz file, used by `get_url`. Format: `<algorithm>:<checksum>` | `sha1:851cef020b346d44893e5d1c3dab83c675d479d9` |
+|`libass_checksum` | Verify the libass-`1.3.0`.tar.gz file, used by `get_url`. Format: `<algorithm>:<checksum>` | `sha256:9cbddee5e8c87e43a5fe627a19cd2aa4c36552156eb4edcf6c5a30bd4934fe58` |
+|`libass_version` | The version of libass to download. Used to build FFmpeg. | `0.15.0` |
+|`libogg_checksum` | Verify the libogg-`1.3.4`.tar.gz file, used by `get_url`. Format: `<algorithm>:<checksum>` | `sha256:fe5670640bd49e828d64d2879c31cb4dde9758681bb664f9bdbf159a01b0c76e` |
 |`libogg_version` | The version of libogg  to download. Used to build FFmpeg. | `1.3.4` |
-|`libvorbis_checksum` | Verify the libvorbis-`1.3.6`.tar.gz file, used by `get_url`. Format: `<algorithm>:<checksum>` | `sha1:91f140c220d1fe3376d637dc5f3d046263784b1f` |
-|`libvorbis_version` | The version of libvorbis  to download. Used to build FFmpeg. | `1.3.6` |
-|`libvpx_checksum` | Verify the libvpx-`1.8.2`.tar.gz file, used by `get_url`. Format: `<algorithm>:<checksum>` | `sha1:7fbc7de47f59431fa2c5b76660f115963e83193d` |
-|`libvpx_version` | The version of libvpx to download. Used to build FFmpeg. | `1.8.2` |
+|`libvorbis_checksum` | Verify the libvorbis-`1.3.7`.tar.gz file, used by `get_url`. Format: `<algorithm>:<checksum>` | `sha256:0e982409a9c3fc82ee06e08205b1355e5c6aa4c36bca58146ef399621b0ce5ab` |
+|`libvorbis_version` | The version of libvorbis  to download. Used to build FFmpeg. | `1.3.7` |
+|`libvpx_checksum` | Verify the libvpx-`1.9.0`.tar.gz file, used by `get_url`. Format: `<algorithm>:<checksum>` | `sha265:d279c10e4b9316bf11a570ba16c3d55791e1ad6faa4404c67422eb631782c80a` |
+|`libvpx_version` | The version of libvpx to download. Used to build FFmpeg. | `1.9.0` |
 |`make_jobs` | Sets an environment variable MAKEFLAGS to '-j X' in the test playbook. | `2` |
-|`nasm_checksum` | Verify the nasm-`2.14.02`.tar.bz2 file, used by `get_url`. Format: `<algorithm>:<checksum>` | `sha1:fe098ee4dc9c4c983696c4948e64b23e4098b92b` |
-|`nasm_version` | The version of NASM to download. Used to build FFmpeg. | `2.14.02` |
-|`opus_checksum` | Verify the opus-`1.3.1`.tar.gz file, used by `get_url`. Format: `<algorithm>:<checksum>` | `sha1:ed226536537861c9f0f1ef7ca79dffc225bc181b` |
+|`nasm_checksum` | Verify the nasm-`2.15.05`.tar.bz2 file, used by `get_url`. Format: `<algorithm>:<checksum>` | `sha256:3c4b8339e5ab54b1bcb2316101f8985a5da50a3f9e504d43fa6f35668bee2fd0` |
+|`nasm_version` | The version of NASM to download. Used to build FFmpeg. | `2.15.05` |
+|`opus_checksum` | Verify the opus-`1.3.1`.tar.gz file, used by `get_url`. Format: `<algorithm>:<checksum>` | `sha256:65b58e1e25b2a114157014736a3d9dfeaad8d41be1c8179866f144a2fb44ff9d` |
 |`opus_version` | The version of opus to download. Used to build FFmpeg. | `1.3.1` |
 |`postgresql_contrib_package` | **Per-Distro** The name used by the `package` module when installing Postgresql's additional features. ||
 |`postgresql_devel_package` | **Per-Distro** The name used by the `package` module when installing the Postgresql C headers and other development libraries. ||
@@ -170,12 +170,14 @@ FFmpeg is built with:
 |`puma_web_concurency` | Number of Puma processes to start. | `4` |
 |`python_psycopg2_package` | **Per-Distro** The name used by the `package` module when installing the Python Postgresql library (used by Ansible). ||
 |`redis_package` | **Per-Distro** The name used by the `package` module when installing Redis. ||
-|`ruby_tarbz2_sha1_checksum` | Verify the ruby-`2.6.5`.tar.bz2 file, used by `ruby-install`. Format: `<checksum>` | `d959802f994594f3296362883b5ce7edf5e6e465` |
-|`ruby_version` | The version of Ruby to download and install. | `2.6.5` |
+|`ruby_install_version` | The version of ruby-install to download and install. | `0.7.1` |
+|`ruby_install_checksum` | Verify the ruby-instal tarball. | `sha256:2a082504f81b6017e8f679f093664fff9b6a282f8df4c9eb0a200643be3fcb56` |
+|`ruby_tarbz2_sha256_checksum` | Verify the ruby-`2.7.2`.tar.bz2 file, used by `ruby-install`. Format: `<checksum>` | `6e5706d0d4ee4e1e2f883db9d768586b4d06567debea353c796ec45e8321c3d4` |
+|`ruby_version` | The version of Ruby to download and install. | `2.7.2` |
 |`sidekiq_threads` | Tune the number of sidekiq threads that will be started. | `10` |
-|`solr_checksum` | Verify the solr-`7.7.2`.tgz file, used by `get_url` module. Format: `<algorithm>:<checksum>` | `sha512:a785e3fae1f46423fe857b443760b5007e484b3f23e0137f42689515c5d0d1dadf518f03a1813e071d65831cdb161b602962b8688d987e5725006087ca507f85` |
+|`solr_checksum` | Verify the solr-`8.7.0`.tgz file, used by `get_url` module. Format: `<algorithm>:<checksum>` | `sha512:15a3af83997e2cbc4bfed304f7d43efd260674d98059241605ff3cde0ae02d8bd1ccd56973c6cba1cc11895655bb76fcf1991bbb94b004e517ce15f728fa163f` |
 |`solr_mirror` | The mirror to use when downloading Solr. | `https://mirror.csclub.uwaterloo.ca/apache` |
-|`solr_version` | The version of Solr to download. | `7.7.2` |
+|`solr_version` | The version of Solr to download. | `8.7.0` |
 |`tomcat_admin_package` | **Per-Distro** The name used by the `package` module when installing the tomcat manager webapps. ||
 |`tomcat_fedora4_conf_path` | **Per-Distro** The path for the configuration file which sets JAVA_OPTS for Fedora4. ||
 |`tomcat_fedora4_war_path` | **Per-Distro** The path at which the fedora4 war file will be copied. ||
@@ -185,11 +187,10 @@ FFmpeg is built with:
 |`tomcat_user_password` | **Secure.** The password used to build the tomcat-users.xml file. | `insecure_password` |
 |`tomcat_user` | **Per-Distro** The user which runs the tomcat service. ||
 |`tomcat_users_conf_path` | **Per-Distro** The path for tomcat-users.xml. ||
-|`x264_checksum` | Verify the x264-snapshot-`20190227-2245-stable`.tar.bz2 file, used by `get_url`. Format: `<algorithm>:<checksum>` | `sha1:95328420e69d39c2055b34289b7208cd4b39fec2` |
-|`x264_version` | The version of x264 to download. Used to build FFmpeg. | `20190227-2245-stable` |
-|`x265_checksum` | Verify the x265_`3.3`.tar.gz file, used by `get_url`. Format: `<algorithm>:<checksum>` | `md5:0c8c747b59b5411dea8cf557554636c1` |
-|`x265_version` | The version of x265 to download. Used to build FFmpeg. | `3.3` |
-|`yasm_checksum` | Verify the yasm-`1.3.0`.tar.gz file, used by `get_url`. Format: `<algorithm>:<checksum>` | `sha1:b7574e9f0826bedef975d64d3825f75fbaeef55e` |
+|`x264_checksum` | Verify the x264-snapshot-`20191217-2245-stable`.tar.bz2 file, used by `get_url`. Format: `<algorithm>:<checksum>` | `sha256:b2495c8f2930167d470994b1ce02b0f4bfb24b3317ba36ba7f112e9809264160` |
+|`x264_version` | The version of x264 to download. Used to build FFmpeg. | `20191217-2245-stable` |
+|`x265_version` | The version of x265 to download. Used to build FFmpeg. | `3.4` |
+|`yasm_checksum` | Verify the yasm-`1.3.0`.tar.gz file, used by `get_url`. Format: `<algorithm>:<checksum>` | `sha256:3dce6601b495f5b3d45b59f7d2492a340ee7e84b5beca17e48f862502bd5603f` |
 |`yasm_version` | The version of Yasm to download. Used to build FFmpeg. | `1.3.0` |
 
 **Per-Distro**: Different value for different OSs. The test playbook uses

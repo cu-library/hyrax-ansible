@@ -15,28 +15,28 @@
 
 - name: Download ruby-install tarball
   get_url:
-    url: https://github.com/postmodern/ruby-install/archive/v0.7.0.tar.gz
-    dest: /tmp/ruby-install-0.7.0.tar.gz
+    url: "https://github.com/postmodern/ruby-install/archive/v{{ ruby_install_version }}.tar.gz"
+    dest: "/tmp/ruby-install-{{ ruby_install_version }}.tar.gz"
     owner: root
     group: root
     mode: u=r,g=r,o=
-    checksum: sha1:7c034d39e16910eddf9c4036feca1d8150fa5135
+    checksum: "{{ ruby_install_version }}"
 
 - name: Unarchive ruby-install into temp directory
   unarchive:
     remote_src: yes
-    src: /tmp/ruby-install-0.7.0.tar.gz
+    src: "/tmp/ruby-install-{{ ruby_install_version }}.tar.gz"
     dest: /tmp
-    creates: /tmp/ruby-install-0.7.0
+    creates: "/tmp/ruby-install-{{ ruby_install_version }}"
 
 - name: Install ruby-install
   command: make install
   args:
-    chdir: /tmp/ruby-install-0.7.0
+    chdir: "/tmp/ruby-install-{{ ruby_install_version }}"
     creates: /usr/local/bin/ruby-install
 
 - name: Install ruby
-  command: /usr/local/bin/ruby-install ruby --system {{ ruby_version }} --sha1 {{ ruby_tarbz2_sha1_checksum }}
+  command: /usr/local/bin/ruby-install ruby --system {{ ruby_version }} --sha1 {{ ruby_tarbz2_sha256_checksum }}
   args:
     creates: /usr/local/bin/ruby
 

@@ -1,2 +1,3 @@
 - src: ansistrano.deploy 
 - src: ansistrano.rollback
+- src: community.general

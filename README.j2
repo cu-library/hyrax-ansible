@@ -23,7 +23,7 @@ These roles assume that an external SMTP server will be used. Some environments 
 `install_hyrax_on_localhost.yml` is a test playbook which runs the provided roles against localhost.
 
 ## Setup, Usage and Deployment
-Initial provisioning of Linux boxes is left outside the scope of this project. We assume a working CentOS 7, Debian 9 or Ubuntu 18.04 system. If you are installing this repository on the box itself, check out the repository in to a local directory, verify the variables in `vars/common.yml`, then do the following:
+Initial provisioning of Linux boxes is left outside the scope of this project. We assume a working CentOS 8, Debian 10 or Ubuntu 20.04.1 system. If you are installing this repository on the box itself, check out the repository in to a local directory, verify the variables in `vars/common.yml`, then do the following:
 
 ```sh
 ansible-galaxy install -r requirements.yml
@@ -170,7 +170,9 @@ FFmpeg is built with:
 |`puma_web_concurency` | Number of Puma processes to start. | `{{ puma_web_concurency }}` |
 |`python_psycopg2_package` | **Per-Distro** The name used by the `package` module when installing the Python Postgresql library (used by Ansible). ||
 |`redis_package` | **Per-Distro** The name used by the `package` module when installing Redis. ||
-|`ruby_tarbz2_sha1_checksum` | Verify the ruby-`{{ ruby_version }}`.tar.bz2 file, used by `ruby-install`. Format: `<checksum>` | `{{ ruby_tarbz2_sha1_checksum }}` |
+|`ruby_install_version` | The version of ruby-install to download and install. | `{{ ruby_install_version }}` |
+|`ruby_install_checksum` | Verify the ruby-instal tarball. | `{{ ruby_install_checksum }}` |
+|`ruby_tarbz2_sha256_checksum` | Verify the ruby-`{{ ruby_version }}`.tar.bz2 file, used by `ruby-install`. Format: `<checksum>` | `{{ ruby_tarbz2_sha256_checksum }}` |
 |`ruby_version` | The version of Ruby to download and install. | `{{ ruby_version }}` |
 |`sidekiq_threads` | Tune the number of sidekiq threads that will be started. | `{{ sidekiq_threads }}` |
 |`solr_checksum` | Verify the solr-`{{ solr_version }}`.tgz file, used by `get_url` module. Format: `<algorithm>:<checksum>` | `{{ solr_checksum }}` |
@@ -187,7 +189,6 @@ FFmpeg is built with:
 |`tomcat_users_conf_path` | **Per-Distro** The path for tomcat-users.xml. ||
 |`x264_checksum` | Verify the x264-snapshot-`{{ x264_version }}`.tar.bz2 file, used by `get_url`. Format: `<algorithm>:<checksum>` | `{{ x264_checksum }}` |
 |`x264_version` | The version of x264 to download. Used to build FFmpeg. | `{{ x264_version }}` |
-|`x265_checksum` | Verify the x265_`{{ x265_version }}`.tar.gz file, used by `get_url`. Format: `<algorithm>:<checksum>` | `{{ x265_checksum }}` |
 |`x265_version` | The version of x265 to download. Used to build FFmpeg. | `{{ x265_version }}` |
 |`yasm_checksum` | Verify the yasm-`{{ yasm_version }}`.tar.gz file, used by `get_url`. Format: `<algorithm>:<checksum>` | `{{ yasm_checksum }}` |
 |`yasm_version` | The version of Yasm to download. Used to build FFmpeg. | `{{ yasm_version }}` |
