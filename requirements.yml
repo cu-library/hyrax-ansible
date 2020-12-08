@@ -1,5 +1,7 @@
-- src: ansistrano.deploy 
-- src: ansistrano.rollback
+---
+roles:
+  - src: ansistrano.deploy 
+  - src: ansistrano.rollback
 
 collections:
-- name: community.general
+  - community.general
