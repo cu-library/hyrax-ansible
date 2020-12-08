@@ -1,3 +1,5 @@
 - src: ansistrano.deploy 
 - src: ansistrano.rollback
-- src: community.general
+
+collections:
+- name: community.general
