@@ -20,7 +20,7 @@
     owner: root
     group: root
     mode: u=r,g=r,o=
-    checksum: "{{ ruby_install_version }}"
+    checksum: "{{ ruby_install_checksum }}"
 
 - name: Unarchive ruby-install into temp directory
   unarchive:
