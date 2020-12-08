@@ -67,9 +67,9 @@ ruby_install_checksum: sha256:2a082504f81b6017e8f679f093664fff9b6a282f8df4c9eb0a
 ruby_tarbz2_sha256_checksum: 65a590313d244d48dc2ef9a9ad015dd8bc6faf821621bbb269aa7462829c75ed 
 ruby_version: "2.7.2"
 sidekiq_threads: 10
-solr_checksum: sha512:15a3af83997e2cbc4bfed304f7d43efd260674d98059241605ff3cde0ae02d8bd1ccd56973c6cba1cc11895655bb76fcf1991bbb94b004e517ce15f728fa163f 
+solr_checksum: sha512:ca9200c18cc19ab723fd4d10f257e27eb81dc8bc33401ebc4eb99178faf4033a2684f0f8b12ae7b659cfeb0f4c9d9e24aaac518a4e00fd28b69854a359a666ed
 solr_mirror: https://mirror.csclub.uwaterloo.ca/apache # No trailing slash!
-solr_version: "8.7.0"
+solr_version: "7.7.3"
 tomcat_user_password: insecure_password
 x264_checksum: sha256:b2495c8f2930167d470994b1ce02b0f4bfb24b3317ba36ba7f112e9809264160
 x264_version: 20191217-2245-stable
