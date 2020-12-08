@@ -17,6 +17,7 @@
     - gcc
     - gcc-c++
     - git
+    - harfbuzz-devel
     - libtool
     - make
     - mercurial
@@ -38,6 +39,7 @@
     - libfontconfig1-dev
     - libfreetype6-dev
     - libfribidi-dev
+    - libharfbuzz-dev
     - libsdl2-dev
     - libtool
     - libva-dev
