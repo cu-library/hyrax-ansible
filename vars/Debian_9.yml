@@ -1,0 +1,21 @@
+---
+# Variables for Debian.
+clamav_devel_package: libclamav-dev
+imagemagick_package: imagemagick
+java_openjdk_package: openjdk-8-jdk
+libxslt_devel_package: libxslt-dev
+libxml2_devel_package: libxml2-dev
+postgresql_contrib_package: postgresql-contrib
+postgresql_devel_package: postgresql-all
+postgresql_server_package: postgresql
+python_psycopg2_package: python-psycopg2
+redis_package: redis-server
+sqlite_devel_package: libsqlite3-dev
+tomcat_admin_package: tomcat8-admin
+tomcat_fedora4_conf_path: /usr/share/tomcat8/bin/setenv.sh
+tomcat_fedora4_war_path: /var/lib/tomcat8/webapps/fcrepo.war
+tomcat_group: tomcat8
+tomcat_package: tomcat8
+tomcat_service_name: tomcat8
+tomcat_user: tomcat8
+tomcat_users_conf_path: /etc/tomcat8/tomcat-users.xml
