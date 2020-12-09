@@ -8,7 +8,7 @@ libxml2_devel_package: libxml2-devel
 postgresql_contrib_package: postgresql-contrib
 postgresql_devel_package: postgresql-devel
 postgresql_server_package: postgresql-server
-python_psycopg2_package: python-psycopg2
+python_psycopg2_package: python3-psycopg2
 redis_package: redis
 sqlite_devel_package: sqlite-devel
 tomcat_admin_package: tomcat-admin-webapps
