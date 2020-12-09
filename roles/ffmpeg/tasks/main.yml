@@ -47,6 +47,7 @@
     - libxcb-shm0-dev
     - libxcb-xfixes0-dev
     - libxcb1-dev
+    - mercurial
     - pkg-config
     - texinfo
     - wget
