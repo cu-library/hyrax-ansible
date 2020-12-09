@@ -10,7 +10,7 @@ The idea is similar to https://github.com/Islandora-Devops/claw-playbook
 
 These roles install the dependences for Hyrax (Solr, Ruby, Redis, PostreSQL, Node.js, Nginx, FITS, FFmpeg, and Fedora 4) then installs a Hyrax based application from a Github repository using Ansistrano.
 
-This playbook is being tested against the latest versions of CentOS 7, Debian 9, and Ubuntu 18.04. The Vagrantfile used is available at https://github.com/cu-library/hyrax-ansible-testvagrants.
+This playbook is being tested against CentOS 7, Debian 9, Debian 10, Ubuntu 18.04 and Ubuntu 20.04. The Vagrantfile used is available at https://github.com/cu-library/hyrax-ansible-testvagrants.
 
 All roles assume services (Nginx, Fedora 4, PostgreSQL) are installed on one machine and communicate using UNIX sockets or the loopback interface. For large deployments, you'll want to edit these roles so that services are deployed on different machines and that communication between them is encrypted.
 
@@ -23,7 +23,7 @@ These roles assume that an external SMTP server will be used. Some environments 
 `install_hyrax_on_localhost.yml` is a test playbook which runs the provided roles against localhost.
 
 ## Setup, Usage and Deployment
-Initial provisioning of Linux boxes is left outside the scope of this project. We assume a working CentOS 8, Debian 10 or Ubuntu 20.04.1 system. If you are installing this repository on the box itself, check out the repository in to a local directory, verify the variables in `vars/common.yml`, then do the following:
+Initial provisioning of Linux boxes is left outside the scope of this project. We assume a working CentOS 7, Debian 9/10 or Ubuntu 18.04/20.04 system. If you are installing this repository on the box itself, check out the repository in to a local directory, verify the variables in `vars/common.yml`, then do the following:
 
 ```sh
 ansible-galaxy install -r requirements.yml
@@ -85,7 +85,7 @@ Node.js latest version 10.x is installed using the NodeSource repositories.
 Some software is installed at a specific version:
 
 * Fedora Repository 4.7.5 (Set using `fedora4_version` variable.)
-* Solr 8.7.0 (Set using `solr_version` variable.)
+* Solr 7.7.3 (Set using `solr_version` variable.)
 * Ruby 2.7.2 (Set using `ruby_version` variable.)
 * FFmpeg 4.3.1 (Set using `ffmpeg_version` variable.)
 * FITS 1.5.0 (Set using `fits_version` variable.)
@@ -151,13 +151,13 @@ FFmpeg is built with:
 |`java_openjdk_package` | **Per-Distro** The name used by the `package` module when installing the Java JDK. ||
 |`lame_checksum` | Verify the lame-`3.100`.tar.gz file, used by `get_url`. Format: `<algorithm>:<checksum>` | `sha256:ddfe36cab873794038ae2c1210557ad34857a4b6bdc515785d1da9e175b1da1e` |
 |`lame_version` | The version of lame to download. Used to build FFmpeg. | `3.100` |
-|`libass_checksum` | Verify the libass-`1.3.0`.tar.gz file, used by `get_url`. Format: `<algorithm>:<checksum>` | `sha256:9cbddee5e8c87e43a5fe627a19cd2aa4c36552156eb4edcf6c5a30bd4934fe58` |
+|`libass_checksum` | Verify the libass-`1.3.0`.tar.gz file, used by `get_url`. Format: `<algorithm>:<checksum>` | `sha256:232b1339c633e6a93c153cac7a483e536944921605f35fcbaedc661c62fb49ec` |
 |`libass_version` | The version of libass to download. Used to build FFmpeg. | `0.15.0` |
 |`libogg_checksum` | Verify the libogg-`1.3.4`.tar.gz file, used by `get_url`. Format: `<algorithm>:<checksum>` | `sha256:fe5670640bd49e828d64d2879c31cb4dde9758681bb664f9bdbf159a01b0c76e` |
 |`libogg_version` | The version of libogg  to download. Used to build FFmpeg. | `1.3.4` |
 |`libvorbis_checksum` | Verify the libvorbis-`1.3.7`.tar.gz file, used by `get_url`. Format: `<algorithm>:<checksum>` | `sha256:0e982409a9c3fc82ee06e08205b1355e5c6aa4c36bca58146ef399621b0ce5ab` |
 |`libvorbis_version` | The version of libvorbis  to download. Used to build FFmpeg. | `1.3.7` |
-|`libvpx_checksum` | Verify the libvpx-`1.9.0`.tar.gz file, used by `get_url`. Format: `<algorithm>:<checksum>` | `sha265:d279c10e4b9316bf11a570ba16c3d55791e1ad6faa4404c67422eb631782c80a` |
+|`libvpx_checksum` | Verify the libvpx-`1.9.0`.tar.gz file, used by `get_url`. Format: `<algorithm>:<checksum>` | `sha256:d279c10e4b9316bf11a570ba16c3d55791e1ad6faa4404c67422eb631782c80a` |
 |`libvpx_version` | The version of libvpx to download. Used to build FFmpeg. | `1.9.0` |
 |`make_jobs` | Sets an environment variable MAKEFLAGS to '-j X' in the test playbook. | `2` |
 |`nasm_checksum` | Verify the nasm-`2.15.05`.tar.bz2 file, used by `get_url`. Format: `<algorithm>:<checksum>` | `sha256:3c4b8339e5ab54b1bcb2316101f8985a5da50a3f9e504d43fa6f35668bee2fd0` |
@@ -172,12 +172,12 @@ FFmpeg is built with:
 |`redis_package` | **Per-Distro** The name used by the `package` module when installing Redis. ||
 |`ruby_install_version` | The version of ruby-install to download and install. | `0.7.1` |
 |`ruby_install_checksum` | Verify the ruby-instal tarball. | `sha256:2a082504f81b6017e8f679f093664fff9b6a282f8df4c9eb0a200643be3fcb56` |
-|`ruby_tarbz2_sha256_checksum` | Verify the ruby-`2.7.2`.tar.bz2 file, used by `ruby-install`. Format: `<checksum>` | `6e5706d0d4ee4e1e2f883db9d768586b4d06567debea353c796ec45e8321c3d4` |
+|`ruby_tarbz2_sha256_checksum` | Verify the ruby-`2.7.2`.tar.bz2 file, used by `ruby-install`. Format: `<checksum>` | `65a590313d244d48dc2ef9a9ad015dd8bc6faf821621bbb269aa7462829c75ed` |
 |`ruby_version` | The version of Ruby to download and install. | `2.7.2` |
 |`sidekiq_threads` | Tune the number of sidekiq threads that will be started. | `10` |
-|`solr_checksum` | Verify the solr-`8.7.0`.tgz file, used by `get_url` module. Format: `<algorithm>:<checksum>` | `sha512:15a3af83997e2cbc4bfed304f7d43efd260674d98059241605ff3cde0ae02d8bd1ccd56973c6cba1cc11895655bb76fcf1991bbb94b004e517ce15f728fa163f` |
+|`solr_checksum` | Verify the solr-`7.7.3`.tgz file, used by `get_url` module. Format: `<algorithm>:<checksum>` | `sha512:ca9200c18cc19ab723fd4d10f257e27eb81dc8bc33401ebc4eb99178faf4033a2684f0f8b12ae7b659cfeb0f4c9d9e24aaac518a4e00fd28b69854a359a666ed` |
 |`solr_mirror` | The mirror to use when downloading Solr. | `https://mirror.csclub.uwaterloo.ca/apache` |
-|`solr_version` | The version of Solr to download. | `8.7.0` |
+|`solr_version` | The version of Solr to download. | `7.7.3` |
 |`tomcat_admin_package` | **Per-Distro** The name used by the `package` module when installing the tomcat manager webapps. ||
 |`tomcat_fedora4_conf_path` | **Per-Distro** The path for the configuration file which sets JAVA_OPTS for Fedora4. ||
 |`tomcat_fedora4_war_path` | **Per-Distro** The path at which the fedora4 war file will be copied. ||

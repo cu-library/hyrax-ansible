@@ -10,7 +10,7 @@ The idea is similar to https://github.com/Islandora-Devops/claw-playbook
 
 These roles install the dependences for Hyrax (Solr, Ruby, Redis, PostreSQL, Node.js, Nginx, FITS, FFmpeg, and Fedora 4) then installs a Hyrax based application from a Github repository using Ansistrano.
 
-This playbook is being tested against the latest versions of CentOS 7, Debian 9, and Ubuntu 18.04. The Vagrantfile used is available at https://github.com/cu-library/hyrax-ansible-testvagrants.
+This playbook is being tested against CentOS 7, Debian 9, Debian 10, Ubuntu 18.04 and Ubuntu 20.04. The Vagrantfile used is available at https://github.com/cu-library/hyrax-ansible-testvagrants.
 
 All roles assume services (Nginx, Fedora 4, PostgreSQL) are installed on one machine and communicate using UNIX sockets or the loopback interface. For large deployments, you'll want to edit these roles so that services are deployed on different machines and that communication between them is encrypted.
 
@@ -23,7 +23,7 @@ These roles assume that an external SMTP server will be used. Some environments 
 `install_hyrax_on_localhost.yml` is a test playbook which runs the provided roles against localhost.
 
 ## Setup, Usage and Deployment
-Initial provisioning of Linux boxes is left outside the scope of this project. We assume a working CentOS 8, Debian 10 or Ubuntu 20.04.1 system. If you are installing this repository on the box itself, check out the repository in to a local directory, verify the variables in `vars/common.yml`, then do the following:
+Initial provisioning of Linux boxes is left outside the scope of this project. We assume a working CentOS 7, Debian 9/10 or Ubuntu 18.04/20.04 system. If you are installing this repository on the box itself, check out the repository in to a local directory, verify the variables in `vars/common.yml`, then do the following:
 
 ```sh
 ansible-galaxy install -r requirements.yml
