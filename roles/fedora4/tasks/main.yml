@@ -1,67 +1,26 @@
 ---
 # Setup Tomcat and Fedora4
+- name: Ensure group "tomcat" exists with correct gid
+  group:
+    name: "{{ tomcat_group }}"
+    state: present
+    gid: 501
+
+- name: Add the user 'tomcat' with a specific uid and a primary group of 'tomcat'
+  user:
+    name: "{{ tomcat_user }}"
+    uid: 501
+    state: present
+    group: "{{ tomcat_group }}"
 
 - name: Install Java 1.8 (OpenJDK)
   package:
     name: "{{ java_openjdk_package }}"
     state: present
 
-- name: Install python postgresql module
-  package:
-    name: "{{ python_psycopg2_package }}"
-    state: present
-
-- name: Create the Fedora 4 database
-  postgresql_db:
-    name: fcrepo
-    state: present
-    encoding: UTF-8
-    lc_collate: en_US.UTF-8
-    lc_ctype: en_US.UTF-8
-    template: template0
-  become: yes
-  become_user: postgres
-  vars:
-    ansible_ssh_pipelining: true
-
-- name: Add Fedora 4 database user
-  postgresql_user:
-    db: fcrepo
-    name: fcrepo
-    password: "{{ fedora4_postgresqldatabase_user_password }}"
-    encrypted: yes
-    priv: ALL
-    state: present
-  become: yes
-  become_user: postgres
-  vars:
-    ansible_ssh_pipelining: true
-
-- name: Get the location of the pg_hba.conf file
-  command: psql -t -P format=unaligned -c 'show hba_file'
-  become: yes
-  become_user: postgres
-  vars:
-    ansible_ssh_pipelining: true
-  register: hba_file
-  changed_when: false
-
-- name: Allow fedora4 user to connect to postgresl using password auth
-  blockinfile:
-    path: "{{ hba_file.stdout }}"
-    insertafter: "^# TYPE  DATABASE        USER            ADDRESS                 METHOD"
-    marker: "# {mark} Ansible Managed - Allow fedora4 user to connect using md5 auth"
-    block: |
-      host    fcrepo          fcrepo          127.0.0.1/32            md5
-  notify: restart postgresql
-
-- name: Run handlers to restart PostgreSQL if needed
-  meta: flush_handlers
-
-- name: Install Tomcat servlet container
-  package:
-    name: "{{ tomcat_package }}"
-    state: present
+- name: Enable package for Amazon Linux
+  shell: "amazon-linux-extras enable tomcat8.5 && yum clean metadata"
+  when: ansible_distribution == "Amazon"
 
 - name: Install the Tomcat host manager and admin applications
   package:
@@ -92,7 +51,7 @@
     owner: "{{ tomcat_user }}"
     group: "{{ tomcat_group }}"
     state: directory
-    path: /var/fedora4/data
+    path: /opt/fcrepo-data
 
 - name: Create the Fedora 4 tomcat conf file which sets JAVA_OPTS
   template:

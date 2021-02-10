@@ -1,2 +1,3 @@
 roles/fedora4/files/fcrepo-webapp-*.war
 roles/solr/files/solr-*.tgz
+hosts.yml

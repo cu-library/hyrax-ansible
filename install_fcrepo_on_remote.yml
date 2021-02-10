@@ -1,0 +1,10 @@
+---
+# Playbook for installing Hyrax IR Stack.
+- name: Install Fedora on remote hosts.
+  hosts: fcrepo
+  become: yes
+  vars_files:
+    - "vars/common.yml"
+    - "vars/{{ ansible_distribution }}.yml"
+  roles:
+    - fedora4

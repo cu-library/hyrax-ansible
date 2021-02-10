@@ -1,4 +1,5 @@
 ---
+ansible_ssh_common_args: '-o ProxyCommand="ssh -W %h:%p -q rob@old.notch8.com" -i ../id_rsa'
 # Common variables for all hosts
 ansistrano_after_symlink_tasks_file: "{{ playbook_dir }}/roles/hyrax/tasks/after_symlink.yml"
 ansistrano_before_symlink_tasks_file: "{{ playbook_dir }}/roles/hyrax/tasks/before_symlink.yml"
@@ -32,7 +33,7 @@ ffmpeg_version: "4.2.2"
 fits_checksum: sha1:8e61b4b80f0098141bb8d764e6fbdc43675c7d6e
 fits_version: "1.5.0"
 hyrax_backups_directory: /var/backups # No trailing slash!
-hyrax_database_pool_size: 30 
+hyrax_database_pool_size: 30
 hyrax_from_email_address: test@example.com
 hyrax_postgresqldatabase_user_password: insecure_password
 hyrax_secret_key_base: insecure_key_base

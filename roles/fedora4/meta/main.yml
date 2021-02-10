@@ -2,4 +2,3 @@
 # List role dependencies for this role
 
 dependencies:
-  - { role: postgresql }
