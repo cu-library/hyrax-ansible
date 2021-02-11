@@ -119,7 +119,7 @@ FFmpeg is built with:
 |`ansistrano_git_branch` | What version of the repository to check out. This can be the full 40-character SHA-1 hash, the literal string HEAD, a branch name, or a tag name. | `master` |
 |`ansistrano_git_identity_key_path` | If specified this file is copied over and used as the identity key for the git commands, path is relative to the playbook in which it is used ||
 |`aom_version` | The version of aom to download. Used to build FFmpeg. | `c52d9602fef3094c880520b5af621ad8db0813fd` |
-|`bundler_version` | The version of the gem bundler to install. | `2.1.4` |
+|`bundler_version` | The version of the gem bundler to install. | `2.2.9` |
 |`cmake_checksum` | Verify the cmake-`3.19.1`.tar.gz file, used by `get_url`. Format: `<algorithm>:<checksum>` | `sha256:587fb2d882214511f4b260329800de7903eba7827498f06a0dee234ed579bdc3` |
 |`cmake_version` | The version of cmake to download. Used to build aom library for FFmpeg. | `3.19.1` |
 |`fdk_aac_checksum` | Verify the fdk-aac-`2.0.1`.tar.gz file, used by `get_url`. Format: `<algorithm>:<checksum>` | `sha256:a4142815d8d52d0e798212a5adea54ecf42bcd4eec8092b37a8cb615ace91dc6` |
