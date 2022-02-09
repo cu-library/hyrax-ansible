@@ -85,7 +85,7 @@ Node.js latest version 10.x is installed using the NodeSource repositories.
 Some software is installed at a specific version:
 
 * Fedora Repository 4.7.5 (Set using `fedora4_version` variable.)
-* Solr 7.7.2 (Set using `solr_version` variable.)
+* Solr 7.7.3 (Set using `solr_version` variable.)
 * Ruby 2.6.5 (Set using `ruby_version` variable.)
 * FFmpeg 4.2.2 (Set using `ffmpeg_version` variable.)
 * FITS 1.5.0 (Set using `fits_version` variable.)
@@ -175,7 +175,7 @@ FFmpeg is built with:
 |`sidekiq_threads` | Tune the number of sidekiq threads that will be started. | `10` |
 |`solr_checksum` | Verify the solr-`7.7.2`.tgz file, used by `get_url` module. Format: `<algorithm>:<checksum>` | `sha512:a785e3fae1f46423fe857b443760b5007e484b3f23e0137f42689515c5d0d1dadf518f03a1813e071d65831cdb161b602962b8688d987e5725006087ca507f85` |
 |`solr_mirror` | The mirror to use when downloading Solr. | `https://mirror.csclub.uwaterloo.ca/apache` |
-|`solr_version` | The version of Solr to download. | `7.7.2` |
+|`solr_version` | The version of Solr to download. | `7.7.3` |
 |`tomcat_admin_package` | **Per-Distro** The name used by the `package` module when installing the tomcat manager webapps. ||
 |`tomcat_fedora4_conf_path` | **Per-Distro** The path for the configuration file which sets JAVA_OPTS for Fedora4. ||
 |`tomcat_fedora4_war_path` | **Per-Distro** The path at which the fedora4 war file will be copied. ||
@@ -203,5 +203,3 @@ vars_files:
 and per-distribution variable files to provide different variables for different distributions.
 
 **Secure**: Variables which should be different per-host and stored securely using Ansible Vaults or a tool like Hashicorp Vault. The test playbook insecurely puts these variables in `vars/common.yml`.
-
-

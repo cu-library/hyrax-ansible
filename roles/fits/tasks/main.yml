@@ -38,7 +38,7 @@
 - name: Make symbolic link for FITS
   file:
     src: "/opt/fits-{{ fits_version }}"
-    dest: /opt/fits
+    dest: "{{ fits_path }}"
     state: link
     owner: root
     group: root

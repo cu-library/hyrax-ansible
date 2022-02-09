@@ -15,7 +15,7 @@
   command: /bin/postgresql-setup initdb
   args:
     creates: /var/lib/pgsql/initdb.log
-  when: ansible_distribution == "CentOS"
+  when: ansible_distribution == "CentOS" or ansible_distribution == "Amazon"
 
 - name: Start the PostgreSQL service
   service:

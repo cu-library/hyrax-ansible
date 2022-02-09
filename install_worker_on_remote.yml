@@ -1,0 +1,10 @@
+---
+# Playbook for installing Hyrax IR Stack.
+- name: Install Worker on remote hosts.
+  hosts: worker
+  become: yes
+  vars_files:
+    - "vars/common.yml"
+    - "vars/{{ ansible_distribution }}.yml"
+  roles:
+    - hyrax

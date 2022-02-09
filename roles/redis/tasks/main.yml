@@ -1,11 +1,16 @@
 ---
 # Install Redis
+- name: Install epel
+  command: amazon-linux-extras install epel -y
+  args:
+    creates: /etc/yum.repos.d/epel.repo
+  when: ansible_distribution == "Amazon"
 
 - name: Enable EPEL repository
   yum:
     name: epel-release
     state: present
-  when: ansible_distribution == "CentOS"
+  when: ansible_distribution == "CentOS" or ansible_distribution == "Amazon"
 
 - name: Install Redis
   package:

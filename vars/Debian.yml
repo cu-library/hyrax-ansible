@@ -1,6 +1,7 @@
 ---
 # Variables for Debian.
 clamav_devel_package: libclamav-dev
+vip_package: libvips
 imagemagick_package: imagemagick
 java_openjdk_package: openjdk-8-jdk
 libxslt_devel_package: libxslt-dev

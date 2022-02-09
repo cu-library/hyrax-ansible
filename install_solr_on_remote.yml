@@ -1,0 +1,10 @@
+---
+# Playbook for installing Hyrax IR Stack.
+- name: Install Solr on remote hosts.
+  hosts: solr
+  become: yes
+  vars_files:
+    - "vars/common.yml"
+    - "vars/{{ ansible_distribution }}.yml"
+  roles:
+    - solr

@@ -7,6 +7,10 @@
     state: present
   when: ansible_os_family == "Debian"
 
+- name: Enable package for Amazon Linux
+  shell: "amazon-linux-extras enable nginx1 && yum clean metadata"
+  when: ansible_distribution == "Amazon"
+
 - name: Add Nginx gpg key [CentOS]
   rpm_key:
     state: present

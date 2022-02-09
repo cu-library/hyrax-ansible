@@ -1,0 +1,9 @@
+- name: Deploy Rails App
+  hosts: hyrax,worker
+  become: yes
+  become_user: 'hyrax'
+  vars_files:
+    - "vars/common.yml"
+    - "vars/{{ ansible_distribution }}.yml"
+  roles:
+    - { role: ansistrano.deploy }

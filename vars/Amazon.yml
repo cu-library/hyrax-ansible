@@ -1,6 +1,7 @@
 ---
 # Variables for Amazon Linux 2.
 clamav_devel_package: clamav-devel
+vips_package: vips,vips-tools
 imagemagick_package: ImageMagick
 java_openjdk_package: java-1.8.0-openjdk
 libxslt_devel_package: libxslt-devel

@@ -1,0 +1,2 @@
+ffmpeg_bin_dir: /opt/ffmpeg/bin
+fits_path: /opt/fits

@@ -20,6 +20,14 @@
     disable_gpg_check: yes
   when: ansible_distribution == "CentOS"
 
+- name: Download up NodeSource [Amazon]
+  get_url: url="https://rpm.nodesource.com/setup_14.x" dest=~/setup_14.sh mode=u=rwx,g=r,o=x
+  when: ansible_distribution == "Amazon"
+
+- name: Execute up NodeSource [Amazon]
+  command: ~/setup_14.sh
+  when: ansible_distribution == "Amazon"
+
 - name: Add NodeSource repository configuration [Debian/Ubuntu]
   template:
     src: nodesource.list
