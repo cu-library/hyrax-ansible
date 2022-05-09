@@ -3,3 +3,4 @@ roles/solr/files/solr-*.tgz
 hosts.yml
 admpriv.pem
 vars/common.yml
+*~undo-tree~

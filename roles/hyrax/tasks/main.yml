@@ -6,7 +6,7 @@
 - name: Install ImageMagick
   package:
     name: "{{ imagemagick_package }}"
-    state: present
+    state: absent
 
 - name: Install LibreOffice
   package:
