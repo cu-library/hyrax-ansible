@@ -1,3 +1,4 @@
+---
 ansible_ssh_common_args: ENC[AES256_GCM,data:CF+irAqaTO2MZUyzF/thIAL/F6rs/HhN3v7nlHdy4Gkr0pWm5cO9nGvLexTFSgo5ras0Axy8m8b4p+TpM/Ajq9s=,iv:xSS2Mzb/aTMzaIOy+V78yGJ4xMXt+S5s9GZFU0nbjUQ=,tag:jYF7+5+lcysj5k9AchisFw==,type:str]
 #ENC[AES256_GCM,data:Dlv6Ayw0JT9KE7EuZb/xy9QIHlr0DrzyDSiON/x9kw==,iv:Nq//4C9af5EP1PCOtnvCAMlfYu8g53Bcoc1/4VWAVa8=,tag:mtFJmsP5JBAAlAIoG3QVHg==,type:comment]
 ansistrano_after_symlink_tasks_file: ENC[AES256_GCM,data:FcaLnx2aZRDfyRa1jPf/CuGfEX2naswgBUGeWQhj5KpqB/hdNBQZwj2dG0BNy+26fk84744r,iv:7OUZUKZqqJ/Dt3yZvhmqnjp3KL4cBtiPXi8/wR75y4Q=,tag:KDPdNV5ffPnHlLHtAPdT8A==,type:str]
@@ -56,8 +57,9 @@ hyrax_backups_directory: ENC[AES256_GCM,data:w9w6+sHj8R4tou3Q,iv:ZUwVlVOu9Fda6W7
 hyrax_database: ENC[AES256_GCM,data:qgQqP7Slihbv6MA=,iv:Mvc9moOQzn5Yin2Tu/TO0YxiFu/eepGNROnDqSDFjS8=,tag:27nZjdt9MIloSyAZKHZo6w==,type:str]
 hyrax_database_pool_size: ENC[AES256_GCM,data:prs=,iv:MS+gm0vYcdgfD/mLNrVyC5bIXs2vwHPIA3xycs4Zm0U=,tag:JOgoXi74o/NFQw9zyakGng==,type:int]
 hyrax_database_url: ENC[AES256_GCM,data:xcsN+vIZv1eo464hpSq0+maZRHBJGt0F36pnY+XQvKyuwIQxtDv6mk0IkLYe1E1Y3RwPQ06tZIsk,iv:Zsk305k0iEtYS+50vRAvzjyhYEHZvxLqRuuJkuhpfUc=,tag:k8hVpF7KBwZDyX1CtjrAeg==,type:str]
-hyrax_database_user_password: ENC[AES256_GCM,data:Z3Kn7jYUXATHCjjkg1ziPEA=,iv:F9EHQ5yxmzRmDfdul5w2JeYjhQxefgNXf7V3viOhc2A=,tag:Wpvvdz9X7GBBRAQ8cL7zPw==,type:str]
-hyrax_database_user_password: ENC[AES256_GCM,data:/iLSFPSQl40=,iv:EcGop/1Tdyu+Wvlv203jseDeZ0skyrT5CXocjaYXNIs=,tag:4b9oH4gj+nh+Yfz7sNmUng==,type:str]
+hyrax_database_user_password:
+ - ENC[AES256_GCM,data:Z3Kn7jYUXATHCjjkg1ziPEA=,iv:F9EHQ5yxmzRmDfdul5w2JeYjhQxefgNXf7V3viOhc2A=,tag:Wpvvdz9X7GBBRAQ8cL7zPw==,type:str]
+ - ENC[AES256_GCM,data:/iLSFPSQl40=,iv:EcGop/1Tdyu+Wvlv203jseDeZ0skyrT5CXocjaYXNIs=,tag:4b9oH4gj+nh+Yfz7sNmUng==,type:str]
 hyrax_database_user_username: ENC[AES256_GCM,data:7/35oQNBhw==,iv:yF0az/3R43gHEGnh2W6+1SOKJW9a6XhtPA7GOHsmsfU=,tag:ohmV9WEIB3/p5YTcDbRA5Q==,type:str]
 hyrax_from_email_address: ENC[AES256_GCM,data:wAoO+xRs/K6I7vx7g3P8bw==,iv:98Ro3jUDfMN+L0k52sm6k4MFHf4wIv4GO32o6LaucOI=,tag:ZlC3ifLG56LTmLr4MSXFqA==,type:str]
 hyrax_secret_key_base: ENC[AES256_GCM,data:Sx7gm8rFVXVnAfazEAT+92mKry7Go8/5W+CF0idJHp3IOKGwXxk5+oIoFhqEXiGqNk7giyZE4X+YZCjIVRkMVlx7fnjVgmMNXfcPCO5pEH+8AIyNgRliJGmn4qYcDEJnTyJCrXanEexkehUwn0jtCi/pukYiYf999z4OsfY8Im8=,iv:k99vVJdftShlj0UmqNg4NlPUR4NJKaeoSGXJjD13nFI=,tag:3Z7oS5A9pWqG/H6K5xwSrA==,type:str]
