@@ -1,0 +1,28 @@
+---
+- name: download jpeg source
+  get_url:
+    url: http://www.ijg.org/files/jpegsrc.v8c.tar.gz
+    dest: "imagemagick_sources/jpegsrc.v8c.tar.gz"
+    force: no
+
+- name: unzip jpeg source
+  shell: tar zxvf jpegsrc.v8c.tar.gz creates=jpeg-8c warn=no
+  args:
+    chdir: imagemagick_sources
+
+- name: configure jpeg
+  shell: ./configure --enable-shared
+  args:
+    chdir: imagemagick_sources/jpeg-8c
+
+- name: make jpeg
+  shell: make
+  args:
+    chdir: imagemagick_sources/jpeg-8c
+
+- name: install jpeg
+  become: yes
+  shell: make install
+  args:
+    chdir: imagemagick_sources/jpeg-8c
+...

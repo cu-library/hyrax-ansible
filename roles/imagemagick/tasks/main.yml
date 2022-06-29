@@ -14,6 +14,9 @@
 - name: install imagemagick specific dependencies
   import_tasks: im_libraries.yml
 
+- name: build libjpg8
+  import_tasks: libjpg8.yml
+
 - name: build openjpg
   import_tasks: openjpg.yml
 
