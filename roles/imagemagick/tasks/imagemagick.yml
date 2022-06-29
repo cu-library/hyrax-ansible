@@ -1,7 +1,7 @@
 ---
 
 - name: fetch imagemagick version archive list
-  shell: curl https://download.imagemagick.org/ImageMagick/download/releases/ | grep '{{ imagemagick_ver }}'
+  shell: curl -k https://download.imagemagick.org/ImageMagick/download/releases/ | grep '{{ imagemagick_version }}'
   register: imagemagick_archive_info
 
 - name: read patch-level from archive results
