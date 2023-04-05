@@ -9,4 +9,5 @@
     - "vars/digital_archives.yml"
   roles:
     - hyrax
+    - apache-shib
     - notch8.ssh

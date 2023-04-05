@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<afp:AttributeFilterPolicyGroup xmlns="urn:mace:shibboleth:2.0:afp:mf:basic"    xmlns:saml="urn:mace:shibboleth:2.0:afp:mf:saml" xmlns:basic="urn:mace:shibboleth:2.0:afp:mf:basic"    xmlns:afp="urn:mace:shibboleth:2.0:afp" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <!-- Shared rule for affiliation values. -->
+  <afp:PermitValueRule id="eduPersonAffiliationValues" xsi:type="OR">
+    <Rule xsi:type="AttributeValueString" value="faculty"/>
+    <Rule xsi:type="AttributeValueString" value="student"/>
+    <Rule xsi:type="AttributeValueString" value="staff"/>
+    <Rule xsi:type="AttributeValueString" value="alum"/>
+    <Rule xsi:type="AttributeValueString" value="member"/>
+    <Rule xsi:type="AttributeValueString" value="affiliate"/>
+    <Rule xsi:type="AttributeValueString" value="employee"/>
+    <Rule xsi:type="AttributeValueString" value="library-walk-in"/>
+  </afp:PermitValueRule>
+  <!-- Shared rule for all "scoped" attributes, but you'll have to manually apply it inside an AttributeRule for each attribute you want to check. -->
+  <afp:PermitValueRule id="ScopingRules" xsi:type="AND">
+    <Rule xsi:type="NOT">
+      <Rule xsi:type="AttributeValueRegex" regex="@"/>
+    </Rule>
+    <Rule xsi:type="saml:AttributeScopeMatchesShibMDScope"/>
+  </afp:PermitValueRule>
+  <afp:AttributeFilterPolicy>
+    <!-- Only accept attributes from CSU campuses -->
+    <afp:PolicyRequirementRule xsi:type="basic:OR">
+      <!-- CO and Moss Landing -->
+      <basic:Rule xsi:type="basic:AttributeIssuerString" value="https://idp-co.calstate.edu/idp/shibboleth" />
+      <basic:Rule xsi:type="basic:AttributeIssuerString" value="urn:mace:incommon:mlml.calstate.edu" />
+      <!-- Campuses -->
+      <basic:Rule xsi:type="basic:AttributeIssuerString" value="https://shib.csub.edu/idp/shibboleth" />
+      <basic:Rule xsi:type="basic:AttributeIssuerString" value="https://mckinley.csuci.edu/idp/shibboleth" />
+      <basic:Rule xsi:type="basic:AttributeIssuerString" value="https://shibboleth.csuchico.edu/idp/shibboleth" />
+      <basic:Rule xsi:type="basic:AttributeIssuerString" value="https://idp.csudh.edu/idp/shibboleth" />
+      <basic:Rule xsi:type="basic:AttributeIssuerString" value="https://idp-t3.csudh.edu/idp/shibboleth" />
+      <basic:Rule xsi:type="basic:AttributeIssuerString" value="https://vince.csueastbay.edu/idp/shibboleth" />
+      <basic:Rule xsi:type="basic:AttributeIssuerString" value="https://shib-idp.its.csufresno.edu/idp/shibboleth" />
+      <basic:Rule xsi:type="basic:AttributeIssuerString" value="https://shibboleth.fullerton.edu/idp/shibboleth" />
+      <basic:Rule xsi:type="basic:AttributeIssuerString" value="urn:mace:incommon:humboldt.edu" />
+      <!-- csula -->
+      <basic:Rule xsi:type="basic:AttributeIssuerString" value="https://sts.windows.net/ce8a2002-448f-4f58-82b1-d86f73e3afdd/" />
+      <basic:Rule xsi:type="basic:AttributeIssuerString" value="https://its-shib.its.csulb.edu/idp/shibboleth" />
+      <basic:Rule xsi:type="basic:AttributeIssuerString" value="https://cma-shibboleth.csum.edu/idp/shibboleth" />
+      <!-- csumb shibboleth idp - remove after verifying okta logins work -->
+      <basic:Rule xsi:type="basic:AttributeIssuerString" value="https://sso.csumb.edu/idp/shibboleth" />
+      <!-- csumb okta idp -->
+      <basic:Rule xsi:type="basic:AttributeIssuerString" value="http://www.okta.com/exkmebp9bq7CBAHFt0x7" />
+      <basic:Rule xsi:type="basic:AttributeIssuerString" value="urn:mace:incommon:csun.edu" />
+      <basic:Rule xsi:type="basic:AttributeIssuerString" value="https://idp.cpp.edu/idp/shibboleth" />
+      <basic:Rule xsi:type="basic:AttributeIssuerString" value="https://idp.csus.edu/idp/shibboleth" />
+      <basic:Rule xsi:type="basic:AttributeIssuerString" value="https://idp.csusb.edu/idp/shibboleth" />
+      <basic:Rule xsi:type="basic:AttributeIssuerString" value="https://idp.sdsu.edu/idp/shibboleth" />
+      <basic:Rule xsi:type="basic:AttributeIssuerString" value="https://idp.sfsu.edu/idp/shibboleth" />
+      <basic:Rule xsi:type="basic:AttributeIssuerString" value="https://idp01.sjsu.edu/idp/shibboleth" />
+      <basic:Rule xsi:type="basic:AttributeIssuerString" value="https://idp.calpoly.edu/idp/shibboleth" />
+      <basic:Rule xsi:type="basic:AttributeIssuerString" value="https://idp.csusm.edu/idp/shibboleth" />
+      <basic:Rule xsi:type="basic:AttributeIssuerString" value="https://login.sonoma.edu/shibboleth" />
+      <basic:Rule xsi:type="basic:AttributeIssuerString" value="https://idp.csustan.edu/idp/shibboleth" />
+    </afp:PolicyRequirementRule>
+    <!-- Filter out undefined affiliations and ensure only one primary. -->
+    <afp:AttributeRule attributeID="affiliation">
+      <afp:PermitValueRule xsi:type="AND">
+        <RuleReference ref="eduPersonAffiliationValues"/>
+        <RuleReference ref="ScopingRules"/>
+      </afp:PermitValueRule>
+    </afp:AttributeRule>
+    <afp:AttributeRule attributeID="unscoped-affiliation">
+      <afp:PermitValueRuleReference ref="eduPersonAffiliationValues"/>
+    </afp:AttributeRule>
+    <afp:AttributeRule attributeID="primary-affiliation">
+      <afp:PermitValueRuleReference ref="eduPersonAffiliationValues"/>
+    </afp:AttributeRule>
+    <afp:AttributeRule attributeID="subject-id">
+      <afp:PermitValueRuleReference ref="ScopingRules"/>
+    </afp:AttributeRule>
+    <afp:AttributeRule attributeID="pairwise-id">
+      <afp:PermitValueRuleReference ref="ScopingRules"/>
+    </afp:AttributeRule>
+    <afp:AttributeRule attributeID="eppn">
+      <afp:PermitValueRuleReference ref="ScopingRules"/>
+    </afp:AttributeRule>
+    <afp:AttributeRule attributeID="targeted-id">
+      <afp:PermitValueRuleReference ref="ScopingRules"/>
+    </afp:AttributeRule>
+    <!-- Require NameQualifier/SPNameQualifier match IdP and SP entityID respectively. -->
+    <afp:AttributeRule attributeID="persistent-id">
+      <afp:PermitValueRule xsi:type="saml:NameIDQualifierString"/>
+    </afp:AttributeRule>
+    <!-- Enforce that the values of schacHomeOrganization are a valid Scope. -->
+    <afp:AttributeRule attributeID="schacHomeOrganization">
+      <afp:PermitValueRule xsi:type="saml:AttributeValueMatchesShibMDScope" />
+    </afp:AttributeRule>
+    <!-- Catch-all that passes everything else through unmolested. -->
+    <afp:AttributeRule attributeID="*" permitAny="true"/>
+  </afp:AttributeFilterPolicy>
+</afp:AttributeFilterPolicyGroup>

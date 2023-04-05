@@ -1,3 +1,4 @@
+.DS_Store
 roles/fedora4/files/fcrepo-webapp-*.war
 roles/solr/files/solr-*.tgz
 hosts.yml
@@ -6,3 +7,8 @@ vars/common.yml
 *~undo-tree~
 vars/digital_archives.yml
 hosts.prod.yml
+roles/apache-shib/files/httpd/.htpasswd
+roles/apache-shib/files/inc-md-cert.pem
+roles/apache-shib/files/sp-cert.pem
+roles/apache-shib/files/sp-key.pem
+roles/apache-shib/files/shibboleth/metadata/OtherIdP-metadata.xml

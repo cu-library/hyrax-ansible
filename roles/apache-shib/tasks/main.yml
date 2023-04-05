@@ -1,0 +1,127 @@
+---
+# Install Apache and Shibboleth
+
+- name: Add Shibboleth repository configuration [Amazon]
+  template:
+    src: shibboleth.repo
+    dest: /etc/yum.repos.d/shibboleth.repo
+    backup: no
+    mode: 0444
+    owner: root
+    group: root
+  when: ansible_distribution == "Amazon"
+
+- name: Run handlers to update package manager caches
+  meta: flush_handlers
+
+- name: Install Apache
+  package:
+    name: httpd-devel
+    state: present
+
+- name: Install Apache SSL
+  package:
+    name: mod_ssl
+    state: present
+
+- name: Install libcurl-devel
+  package:
+    name: libcurl-devel
+    state: present
+
+- name: Gem install rack
+  command: "/usr/local/bin/gem install rack -v {{ rack_version }}"
+  args:
+    creates: "/usr/local/lib/ruby/gems/{{ ruby_version_directory }}/gems/rack-{{ rack_version }}"
+
+- name: Gem install passenger
+  command: "/usr/local/bin/gem install passenger -v {{ passenger_version }}"
+  args:
+    creates: "/usr/local/lib/ruby/gems/{{ ruby_version_directory }}/gems/passenger-{{ passenger_version }}"
+
+- name: Install passenger module
+  shell: "/usr/local/lib/ruby/gems/{{ ruby_version_directory }}/gems/passenger-{{ passenger_version }}/bin/passenger-install-apache2-module -a"
+
+- name: Install shibboleth
+  package:
+    name: shibboleth
+    state: present
+
+- name: Copy main shibboleth config
+  copy:
+    src: "{{ item }}"
+    dest: "/etc/shibboleth/"
+    mode: 0444
+    owner: shibd
+    group: root
+  with_fileglob:
+    - "shibboleth/*"
+
+- name: Add Shibboleth template
+  template:
+    src: shibboleth2.xml
+    dest: /etc/shibboleth/shibboleth2.xml
+    backup: no
+    mode: 0444
+    owner: shibd
+    group: root
+
+- name: Copy metadata shibboleth config
+  copy:
+    src: "shibboleth/metadata"
+    dest: "/etc/shibboleth"
+    mode: 0444
+    owner: shibd
+    group: root
+
+- name: Copy shibboleth pems
+  copy:
+    src: "{{ item }}"
+    dest: "/etc/shibboleth/"
+    mode: 0400
+    owner: shibd
+    group: shibd
+  with_fileglob:
+    - "*.pem"
+
+- name: Copy apache config
+  copy:
+    src: "httpd/conf/httpd.conf"
+    dest: "/etc/httpd/conf/httpd.conf"
+    mode: 0664
+    owner: root
+    group: root
+
+- name: Copy apache bot blocker
+  copy:
+    src: "httpd/custom.d"
+    dest: "/etc/httpd"
+    mode: 0664
+    owner: root
+    group: root
+
+- name: Create vhost.d
+  file:
+    path: /etc/httpd/vhost.d
+    state: directory
+
+- name: Add Shibboleth template
+  template:
+    src: vhost.conf
+    dest: /etc/httpd/vhost.d/{{ scholarworks_host }}.conf
+    backup: no
+    mode: 0664
+    owner: root
+    group: root
+
+- name: Start shibboleth
+  service:
+    name: shibd
+    enabled: yes
+    state: started
+
+- name: Start apache
+  service:
+    name: httpd
+    enabled: yes
+    state: started

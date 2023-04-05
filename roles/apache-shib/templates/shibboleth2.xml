@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SPConfig xmlns="urn:mace:shibboleth:2.0:native:sp:config" xmlns:conf="urn:mace:shibboleth:2.0:native:sp:config" xmlns:saml="urn:oasis:names:tc:SAML:2.0:assertion" xmlns:samlp="urn:oasis:names:tc:SAML:2.0:protocol" xmlns:md="urn:oasis:names:tc:SAML:2.0:metadata" clockSkew="180">
+  <RequestMapper type="XML">
+    <RequestMap>
+      <Host name="{{ scholarworks_host }}" authType="shibboleth" requireSession="true" redirectToSSL="443">
+        <Path name="/dashboard" />
+      </Host>
+    </RequestMap>
+  </RequestMapper>
+  <ApplicationDefaults entityID="https://{{ scholarworks_host }}/shibboleth" REMOTE_USER="eppn persistent-id targeted-id">
+    <Sessions lifetime="28800" timeout="3600" checkAddress="false" relayState="ss:mem" handlerSSL="true" cookieProps="; path=/; HttpOnly; secure">
+      <SSO discoveryProtocol="SAMLDS" discoveryURL="https://ds.calstate.edu/?svc=scholarworks">SAML2</SSO>
+      <Logout>Local</Logout>
+      <Handler type="MetadataGenerator" Location="/Metadata" signing="false"/>
+      <Handler type="Status" Location="/Status" acl="127.0.0.1"/>
+      <Handler type="Session" Location="/Session" showAttributeValues="true"/>
+      <Handler type="DiscoveryFeed" Location="/DiscoFeed" cacheToDisk="false"/>
+    </Sessions>
+    <Errors supportContact="library@calstate.edu" logoLocation="/shibboleth-sp/logo.png" styleSheet="/shibboleth-sp/main.css"/>
+    <MetadataProvider type="XML" url="http://md.incommon.org/InCommon/InCommon-metadata-idp-only.xml" backingFilePath="/etc/shibboleth/metadata/InCommon-metadata-idp-only.xml" reloadInterval="7200">
+      <MetadataFilter type="RequireValidUntil" maxValidityInterval="4219200"/>
+    </MetadataProvider>
+    <MetadataProvider type="XML" path="/etc/shibboleth/metadata/OtherIdP-metadata.xml"/>
+    <AttributeExtractor type="XML" validate="true" path="attribute-map.xml"/>
+    <AttributeResolver type="Query" subjectMatch="true"/>
+    <AttributeFilter type="XML" validate="true" path="attribute-policy.xml"/>
+    <CredentialResolver type="File" key="/etc/shibboleth/sp-key.pem" certificate="/etc/shibboleth/sp-cert.pem"/>
+  </ApplicationDefaults>
+  <SecurityPolicyProvider type="XML" validate="true" path="security-policy.xml"/>
+  <ProtocolProvider type="XML" validate="true" reloadChanges="false" path="protocols.xml"/>
+</SPConfig>
