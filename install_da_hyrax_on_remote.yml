@@ -1,11 +1,12 @@
 ---
 # Playbook for installing Hyrax IR Stack.
-- name: Install Hyrax on remote hosts.
-  hosts: hyrax_0,hyrax_1
+- name: Install Digital Archives Hyrax on remote hosts.
+  hosts: digital_archives_hyrax_0
   become: yes
   vars_files:
     - "vars/common.yml"
     - "vars/{{ ansible_distribution }}.yml"
+    - "vars/digital_archives.yml"
   roles:
     - hyrax
     - notch8.ssh

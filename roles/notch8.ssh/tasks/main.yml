@@ -1,0 +1,26 @@
+---
+- name: verify users
+  user:
+    name: "{{ item.system_user }}"
+    shell: /bin/bash
+    groups: adm,wheel
+    append: yes
+  with_items:
+    - "{{ ssh_users }}"
+
+- name: set up N8 ssh keys
+  authorized_key: >
+    user="{{ item.0.system_user }}"
+    key="https://github.com/{{ item.1 }}.keys"
+  with_subelements:
+    - "{{ ssh_users }}"
+    - github_users
+
+- name: set up additional ssh keys
+  authorized_key: >
+    user="{{ item.0.system_user }}"
+    key="{{ item.1 }}"
+  with_subelements:
+    - "{{ ssh_users }}"
+    - keys
+...

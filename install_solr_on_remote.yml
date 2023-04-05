@@ -8,3 +8,4 @@
     - "vars/{{ ansible_distribution }}.yml"
   roles:
     - solr
+    - notch8.ssh

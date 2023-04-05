@@ -4,3 +4,5 @@ hosts.yml
 admpriv.pem
 vars/common.yml
 *~undo-tree~
+vars/digital_archives.yml
+hosts.prod.yml

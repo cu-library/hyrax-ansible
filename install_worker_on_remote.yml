@@ -8,3 +8,4 @@
     - "vars/{{ ansible_distribution }}.yml"
   roles:
     - hyrax
+    - notch8.ssh

@@ -135,7 +135,7 @@ FFmpeg is built with:
 |`hyrax_backups_directory` | The location where backup files will be created. | `{{ hyrax_backups_directory }}` |
 |`hyrax_database_pool_size` | The size of the database pool. | `{{ hyrax_database_pool_size }}` |
 |`hyrax_from_email_address ` | The email address to use for the from field when sending emails from Hyrax. | `{{ hyrax_from_email_address }}` |
-|`hyrax_postgresqldatabase_user_password` | **Secure.** The password used by hyrax to connect to Postgresql. | `{{ hyrax_postgresqldatabase_user_password }}` |
+|`hyrax_database_user_password` | **Secure.** The password used by hyrax to connect to Postgresql. | `{{ hyrax_database_user_password }}` |
 |`hyrax_secret_key_base` | **Secure.** The secret used by Rails for sessions etc. | `{{ hyrax_secret_key_base }}` |
 |`hyrax_smtp_address` | Rails smtp address. | `{{ hyrax_smtp_address }}` |
 |`hyrax_smtp_port` | Rails smtp port. | `{{ hyrax_smtp_port }}` |
@@ -203,5 +203,3 @@ vars_files:
 and per-distribution variable files to provide different variables for different distributions.
 
 **Secure**: Variables which should be different per-host and stored securely using Ansible Vaults or a tool like Hashicorp Vault. The test playbook insecurely puts these variables in `vars/common.yml`.
-
-

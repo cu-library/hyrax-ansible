@@ -140,6 +140,14 @@
     group: puma
     mode: u=rx,g=rx
 
+- name: Upload the admpriv.pem
+  template:
+    src: ../../../admpriv.pem
+    dest: /var/www/hyrax/shared/admpriv.pem
+    owner: hyrax
+    group: puma
+    mode: u=rx,g=rx
+
 - name: Create the Hyrax database
   postgresql_db:
     name: hyrax

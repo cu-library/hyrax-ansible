@@ -3,13 +3,13 @@
 
 dependencies:
   - { role: common }
-  - { role: fedora4 }
+  # - { role: fedora4 }
   - { role: ffmpeg }
   - { role: nginx }
   - { role: nodejs }
-  - { role: postgresql }
-  - { role: redis }
+  # - { role: postgresql }
+  # - { role: redis }
   - { role: ruby }
-  - { role: solr }
+  # - { role: solr }
   - { role: fits }
   - { role: imagemagick, imagemagick_version: '7.0.7', openjpg_ver: '2.1.0', libtiff_ver: '4.0.5', libpng_ver: '1.6.28', gs_ver: '9.19' }
