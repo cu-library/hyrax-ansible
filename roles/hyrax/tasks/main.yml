@@ -1,7 +1,7 @@
 ---
-# Configure Hyrax
+Configure Hyrax
 
-# Install required packages
+Install required packages
 
 - name: Install ImageMagick
   package:
@@ -237,23 +237,6 @@
     mode: u=rwX,g=rwX,o=rX
     recurse: yes
 
-# Deploy with Ansistrano
-- name: Do a initial deploy
-  include_role:
-    name: ansistrano.deploy
-    apply:
-      become: yes
-      become_user: hyrax
-
-# Install and activate services
-- name: Create solr core
-  command: /opt/solr/bin/solr create_core -c blacklight-core -d /var/www/hyrax/current/solr/config/
-  args:
-    creates: /var/solr/data/blacklight-core/core.properties
-  become: yes
-  become_user: solr
-  when: local_solr
-
 - name: Copy sidekiq service file
   template:
     src: sidekiq.service
@@ -274,17 +257,22 @@
   command: systemctl daemon-reload
   changed_when: False
 
-- name: Restart and enable sidekiq
-  service:
-    name: sidekiq
-    state: restarted
-    enabled: yes
+# Deploy with Ansistrano
+- name: Do a initial deploy
+  include_role:
+    name: ansistrano.deploy
+    apply:
+      become: yes
+      become_user: hyrax
 
-- name: Restart and enable puma
-  service:
-    name: puma
-    state: restarted
-    enabled: yes
+# Install and activate services
+- name: Create solr core
+  command: /opt/solr/bin/solr create_core -c blacklight-core -d /var/www/hyrax/current/solr/config/
+  args:
+    creates: /var/solr/data/blacklight-core/core.properties
+  become: yes
+  become_user: solr
+  when: local_solr
 
 # SELinux tweaking
 
@@ -361,7 +349,7 @@
     owner: root
     group: "{{ tomcat_user }}"
     mode: u=rwX,g=rwX,o=
-
+  when: local_fcrepo
 - name: Ensure the postgres backup directory exists.
   file:
     path: "{{ hyrax_backups_directory }}/current/postgres"
@@ -369,6 +357,7 @@
     owner: root
     group: postgres
     mode: u=rwX,g=rwX,o=
+  when: local_postgres
 
 - name: Ensure the redis backup directory exists.
   file:
@@ -377,6 +366,7 @@
     owner: root
     group: root
     mode: u=rwX,go=
+  when: local_redis
 
 - name: Ensure the hyrax backup directory exists.
   file:

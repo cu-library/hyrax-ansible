@@ -17,4 +17,8 @@
   when: "'sidekiq' in services"
 
 - name: Restart Apache
-  service: name=httpd state=reloaded
+  service:
+    name: httpd
+    state: restarted
+    enabled: yes
+  when: "'httpd' in services"

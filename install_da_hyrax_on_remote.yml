@@ -8,6 +8,6 @@
     - "vars/{{ ansible_distribution }}.yml"
     - "vars/digital_archives.yml"
   roles:
-    - hyrax
     - apache-shib
+    - hyrax
     - notch8.ssh

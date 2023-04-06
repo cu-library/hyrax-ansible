@@ -7,6 +7,6 @@
     - "vars/common.yml"
     - "vars/{{ ansible_distribution }}.yml"
   roles:
+    # - apache-shib
     - hyrax
-    - apache-shib
     - notch8.ssh

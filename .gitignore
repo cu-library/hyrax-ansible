@@ -12,3 +12,9 @@ roles/apache-shib/files/inc-md-cert.pem
 roles/apache-shib/files/sp-cert.pem
 roles/apache-shib/files/sp-key.pem
 roles/apache-shib/files/shibboleth/metadata/OtherIdP-metadata.xml
+roles/apache-shib/files/ssl/archives.calstate.edu-intermediate.cer
+roles/apache-shib/files/ssl/archives.calstate.edu-private.key
+roles/apache-shib/files/ssl/archives.calstate.edu.cer
+roles/apache-shib/files/ssl/scholarworks.calstate.edu-intermediate.cer
+roles/apache-shib/files/ssl/scholarworks.calstate.edu-private.key
+roles/apache-shib/files/ssl/scholarworks.calstate.edu.cer
