@@ -6,7 +6,7 @@
     force: no
 
 - name: unzip openjpg source
-  shell: tar zxvf openjpeg-{{ openjpg_ver }}.tar.gz creates=openjpeg-version.{{ openjpg_ver }} warn=no
+  shell: tar zxvf openjpeg-{{ openjpg_ver }}.tar.gz creates=openjpeg-version.{{ openjpg_ver }}
   args:
     chdir: imagemagick_sources
 

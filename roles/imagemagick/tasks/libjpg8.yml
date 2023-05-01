@@ -6,7 +6,7 @@
     force: no
 
 - name: unzip jpeg source
-  shell: tar zxvf jpegsrc.v8c.tar.gz creates=jpeg-8c warn=no
+  shell: tar zxvf jpegsrc.v8c.tar.gz creates=jpeg-8c
   args:
     chdir: imagemagick_sources
 

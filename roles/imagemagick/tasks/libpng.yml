@@ -13,7 +13,7 @@
     force: no
 
 - name: unzip libpng source
-  shell: tar zxvf libpng-{{ libpng_ver }}.tar.gz creates=libpng-{{ libpng_ver }} warn=no
+  shell: tar zxvf libpng-{{ libpng_ver }}.tar.gz creates=libpng-{{ libpng_ver }}
   args:
     chdir: imagemagick_sources
 

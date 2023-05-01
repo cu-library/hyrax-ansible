@@ -6,7 +6,7 @@
     force: no
 
 - name: unzip libtiff source
-  shell: tar zxvf tiff-{{ libtiff_ver }}.tar.gz creates=tiff-{{ libtiff_ver }} warn=no
+  shell: tar zxvf tiff-{{ libtiff_ver }}.tar.gz creates=tiff-{{ libtiff_ver }}
   args:
     chdir: imagemagick_sources
 

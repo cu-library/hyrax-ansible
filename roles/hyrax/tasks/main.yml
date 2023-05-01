@@ -1,7 +1,7 @@
 ---
-Configure Hyrax
+# Configure Hyrax
 
-Install required packages
+# Install required packages
 
 - name: Install ImageMagick
   package:

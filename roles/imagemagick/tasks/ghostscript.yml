@@ -10,7 +10,7 @@
     force: no
 
 - name: unzip ghostscript source
-  shell: tar zxvf ghostscript-{{ gs_ver }}.tar.gz creates=ghostscript-{{ gs_ver }} warn=no
+  shell: tar zxvf ghostscript-{{ gs_ver }}.tar.gz creates=ghostscript-{{ gs_ver }}
   args:
     chdir: imagemagick_sources
 

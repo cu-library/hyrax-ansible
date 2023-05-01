@@ -24,7 +24,7 @@
     force: no
 
 - name: unzip imagemagick source
-  shell: tar xf ImageMagick-{{ imagemagick_patchlevel }}.tar.xz creates=ImageMagick-{{ imagemagick_patchlevel }} warn=no
+  shell: tar xf ImageMagick-{{ imagemagick_patchlevel }}.tar.xz creates=ImageMagick-{{ imagemagick_patchlevel }}
   args:
     chdir: imagemagick_sources
 
